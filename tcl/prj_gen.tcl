@@ -10,9 +10,9 @@ proc add_src_to_project { dir } {
 }
 
 set _prj_name_ "project_1"
-create_project ${_prj_name_} ${_prj_name_} -part xcvc1902-vsvd1760-2MP-e-S
+create_project -force ${_prj_name_} ${_prj_name_} -part xcvc1902-vsvd1760-2MP-e-S
 set_property board_part xilinx.com:vck5000:part0:1.0 [current_project]
-add_src_to_project ../v/vadd_bandwidth1r1w_placeholcer
+add_src_to_project ../v/vadd_bandwidth1r1w_placeholder
 source ../tcl/design_1.tcl
 update_compile_order -fileset sources_1
 make_wrapper -files [get_files ${_prj_name_}/${_prj_name_}.srcs/sources_1/bd/design_1/design_1.bd] -top
