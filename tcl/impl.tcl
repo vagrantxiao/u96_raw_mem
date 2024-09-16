@@ -1,6 +1,6 @@
 
 open_checkpoint overlay.dcp
-read_checkpoint -cell design_1/vadd_bw_0/inst ./vad_bw.dcp
+read_checkpoint -cell design_1/vadd_bw_0/inst ./vadd_bw.dcp
 opt_design
 place_design
 phys_opt_design
