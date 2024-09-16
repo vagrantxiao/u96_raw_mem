@@ -1,6 +1,6 @@
 
 TEMP_DIR := $(CURDIR)/build
-VPP      := vivado -source 
+VPP      := vivado -mode batch -source 
 OVERLAY  := $(TEMP_DIR)/overlay.dcp
 m=$(shell date)
 
