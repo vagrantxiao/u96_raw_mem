@@ -1,1 +1,6 @@
-# u96_raw_mem
+# How to make VCK5000 Overlay
+
+1. Copy vck5000 to <your Vivado installation>/Vivado/2022.2/data/xhub/boards/XilinxBoardStore/boards/Xilinx
+2. make all.
+3. Find the proverlay.dcp in build directory.
+4. make your design have the same interface as ./v/vadd_bandwidth28r28w_placeholder.

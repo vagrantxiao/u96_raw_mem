@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<ip_presets schema="1.0">
+ 
+	<ip_preset preset_proc_name="versal_cips_preset"> 
+		<ip vendor="xilinx.com" library="ip" name="versal_cips" version="*"> 
+			<user_parameters>
+
+				<user_parameter name="CONFIG.PMC_BANK_1_IO_STANDARD" value="LVCMOS3.3"/>
+				<user_parameter name="CONFIG.PS_BANK_2_IO_STANDARD" value="LVCMOS3.3"/>			    
+
+				<!-- <user_parameter name="CONFIG.PS_USE_M_AXI_GP0" value="1"/> -->
+				<!-- <user_parameter name="CONFIG.PS_USE_M_AXI_GP0" value="1"/>	 -->
+
+				<user_parameter name="CONFIG.PMC_OSPI_PERIPHERAL_ENABLE" value="1"/>
+				<user_parameter name="CONFIG.PMC_CRP_OSPI_REF_CTRL_FREQMHZ" value="135"/>
+			
+                <user_parameter name="CONFIG.PMC_MIO_12_DIRECTION" value="out"/>
+                <user_parameter name="CONFIG.PMC_MIO_12_USAGE" value="GPIO"/>
+				
+				<user_parameter name="CONFIG.PMC_I2CPMC_PERIPHERAL_ENABLE" value="1"/>
+				<user_parameter name="CONFIG.PMC_I2CPMC_PERIPHERAL_IO" value="PMC_MIO 26 .. 27"/>	
+				
+			    <user_parameter name="CONFIG.PS_I2C0_PERIPHERAL_ENABLE" value="1"/>
+				<user_parameter name="CONFIG.PS_I2C0_PERIPHERAL_IO" value="PMC_MIO 30 .. 31"/>				
+
+				<user_parameter name="CONFIG.PS_I2C1_PERIPHERAL_ENABLE" value="1"/>	
+				<user_parameter name="CONFIG.PS_I2C1_PERIPHERAL_IO" value="PS_MIO 24 .. 25"/>		
+
+				<user_parameter name="CONFIG.PS_UART0_PERIPHERAL_ENABLE" value="1"/>	
+				<user_parameter name="CONFIG.PS_UART0_PERIPHERAL_IO" value="PS_MIO 16 .. 17"/>	
+				
+				<user_parameter name="CONFIG.PS_UART1_PERIPHERAL_ENABLE" value="1"/>	
+				<user_parameter name="CONFIG.PS_UART1_PERIPHERAL_IO" value="PS_MIO 20 .. 21"/>						
+				
+				<user_parameter name="CONFIG.PMC_GPIO0_MIO_PERIPHERAL_ENABLE" value="1"/>	
+				<user_parameter name="CONFIG.PMC_GPIO1_MIO_PERIPHERAL_ENABLE" value="1"/>										
+				<user_parameter name="CONFIG.PS_GPIO2_MIO_PERIPHERAL_ENABLE" value="1"/>	
+
+                <user_parameter name="CONFIG.SUBPRESET1" value="simple_temperature__monitoring"/>      
+                <user_parameter name="CONFIG.SMON_INTERFACE_TO_USE" value="I2C"/>     
+                <user_parameter name="CONFIG.PS_I2CSYSMON_PERIPHERAL_IO" value="PMC_MIO 18 .. 20"/>															
+			    <!-- <user_parameter name="CONFIG.SMON_ENABLE_TEMP_MONITORING" value="1"/>	 -->
+			 	<!-- <user_parameter name="CONFIG.SMON_ENABLE_VOLTAGE_MONITORING" value="1"/> -->
+
+                <user_parameter name="CONFIG.PMC_MIO_0_DRIVE_STRENGTH" value="12mA"/>
+                <user_parameter name="CONFIG.PMC_MIO_0_SLEW" value="fast"/>
+                <user_parameter name="CONFIG.PMC_MIO_1_DRIVE_STRENGTH" value="12mA"/>
+                <user_parameter name="CONFIG.PMC_MIO_1_SLEW" value="fast"/>
+                <user_parameter name="CONFIG.PMC_MIO_2_DRIVE_STRENGTH" value="12mA"/>
+                <user_parameter name="CONFIG.PMC_MIO_2_SLEW" value="fast"/>
+                <user_parameter name="CONFIG.PMC_MIO_3_DRIVE_STRENGTH" value="12mA"/>
+                <user_parameter name="CONFIG.PMC_MIO_3_SLEW" value="fast"/>
+                <user_parameter name="CONFIG.PMC_MIO_4_DRIVE_STRENGTH" value="12mA"/>
+                <user_parameter name="CONFIG.PMC_MIO_4_SLEW" value="fast"/>
+                <user_parameter name="CONFIG.PMC_MIO_5_DRIVE_STRENGTH" value="12mA"/>
+                <user_parameter name="CONFIG.PMC_MIO_5_SLEW" value="fast"/>
+                <user_parameter name="CONFIG.PMC_MIO_7_DRIVE_STRENGTH" value="12mA"/>
+                <user_parameter name="CONFIG.PMC_MIO_7_SLEW" value="fast"/>
+                <user_parameter name="CONFIG.PMC_MIO_8_DRIVE_STRENGTH" value="12mA"/>
+                <user_parameter name="CONFIG.PMC_MIO_8_SLEW" value="fast"/>
+                <user_parameter name="CONFIG.PMC_MIO_9_DRIVE_STRENGTH" value="12mA"/>
+                <user_parameter name="CONFIG.PMC_MIO_9_SLEW" value="fast"/>
+                <user_parameter name="CONFIG.PMC_MIO_10_DRIVE_STRENGTH" value="12mA"/>
+                <user_parameter name="CONFIG.PMC_MIO_10_SLEW" value="fast"/>
+                <user_parameter name="CONFIG.PMC_MIO_11_DRIVE_STRENGTH" value="12mA"/>
+                <user_parameter name="CONFIG.PMC_MIO_11_SLEW" value="fast"/>
+
+				<user_parameter name="CONFIG.PS_MIO_5_DIRECTION" value="out"/>
+				<user_parameter name="CONFIG.PS_MIO_5_USAGE" value="GPIO"/>
+				<user_parameter name="CONFIG.PS_MIO_6_USAGE" value="GPIO"/>
+				<user_parameter name="CONFIG.PS_MIO_5_OUTPUT_DATA" value="high"/>					
+				
+				<!-- <user_parameter name="CONFIG.SMON_ENABLE_INT_VOLTAGE_MONITORING" value="1"/>									 -->
+				<!-- <user_parameter name="CONFIG.SMON_INTERFACE_TO_USE" value="I2C"/>			 -->
+				
+                <user_parameter name="CONFIG.PS_PCIE_RESET_ENABLE" value="1"/>
+                <user_parameter name="CONFIG.PS_PCIE_EP_RESET1_IO" value="PMC_MIO 38"/>                
+                <user_parameter name="CONFIG.PS_PCIE_EP_RESET2_IO" value="PMC_MIO 39"/>                	
+				<user_parameter name="CONFIG.PS_I2CSYSMON_PERIPHERAL_IO" value="PMC_MIO 18 .. 20"/>
+				
+            </user_parameters>
+		</ip>
+	</ip_preset>	
+
+
+	<ip_preset preset_proc_name="ddr4_c0_preset"> 
+		<ip vendor="xilinx.com" library="ip" name="axi_noc" version="*"> 
+			<user_parameters>
+			
+				<user_parameter name="CONFIG.CONTROLLERTYPE" value="DDR4_SDRAM"/>  
+				<user_parameter name="CONFIG.MC_NO_CHANNELS" value="Single"/>  
+				<user_parameter name="CONFIG.MC_SYSTEM_CLOCK" value="Differential"/>  
+			    <!-- <user_parameter name="CONFIG.NUM_MC" value="4"/>   -->
+				<user_parameter name="CONFIG.MC_MEMORY_SPEEDGRADE" value="DDR4-3200AA(22-22-22)"/>	
+				<user_parameter name="CONFIG.MC_COMPONENT_WIDTH" value="x16"/> 
+				<user_parameter name="CONFIG.MC_DATAWIDTH" value="64"/>  
+				<user_parameter name="CONFIG.MC_INPUTCLK0_PERIOD" value="5000"/>		
+				<user_parameter name="CONFIG.MC_INTERLEAVE_SIZE" value="128"/>
+				<user_parameter name="CONFIG.MC_STACKHEIGHT" value="1"/>
+                <user_parameter name="CONFIG.MC_MEMORY_DEVICETYPE" value="Components"/>
+                <user_parameter name="CONFIG.MC_ROWADDRESSWIDTH" value="17"/>
+                <user_parameter name="CONFIG.MC_RANK" value="1"/>     
+
+<!-- 			<user_parameter name="CONFIG.MC_ADDR_BIT9" value="BA0"/>
+				<user_parameter name="CONFIG.MC_CHAN_REGION0" value="DDR_LOW0"/>
+				<user_parameter name="CONFIG.MC_CHAN_REGION1" value="DDR_LOW2"/>	
+				<user_parameter name="CONFIG.NUM_CLKS" value="10"/>
+				<user_parameter name="CONFIG.NUM_MCP" value="4"/>
+				<user_parameter name="CONFIG.NUM_SI" value="7"/>	
+				<user_parameter name="CONFIG.NUM_MI" value="8"/>
+				<user_parameter name="CONFIG.NUM_NMI" value="1"/>
+				<user_parameter name="CONFIG.NUM_NSI" value="2"/> -->
+		   </user_parameters>
+		</ip>
+	</ip_preset>  
+	
+
+</ip_presets>
