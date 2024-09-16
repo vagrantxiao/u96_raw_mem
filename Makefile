@@ -1,12 +1,16 @@
 
 TEMP_DIR := $(CURDIR)/build
 VPP      := vivado -source 
-
+OVERLAY  := $(TEMP_DIR)/overlay.dcp
 m=$(shell date)
 
 all:
+
+overlay: $(OVERLAY)
+
+$(OVERLAY): $(CURDIR)/tcl/prj_gen.tcl
 	mkdir -p $(TEMP_DIR)
-	cd $(TEMP_DIR) && $(VPP) ../tcl/prj_gen.tcl
+	cd $(TEMP_DIR) && $(VPP) $<
 
 ooc:
 	mkdir -p $(TEMP_DIR)

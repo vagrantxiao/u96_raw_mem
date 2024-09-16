@@ -19,8 +19,12 @@ make_wrapper -files [get_files ${_prj_name_}/${_prj_name_}.srcs/sources_1/bd/des
 add_files -norecurse ${_prj_name_}/${_prj_name_}.gen/sources_1/bd/design_1/hdl/design_1_wrapper.v
 update_compile_order -fileset sources_1
 set_property top design_1_wrapper [current_fileset]
-add_files -fileset constrs_1 xdc/pdef1.xdc
-set_property target_constrs_file xdc/pdef1.xdc [current_fileset -constrset]
+add_files -fileset constrs_1 ../xdc/pdef1.xdc
+set_property target_constrs_file ../xdc/pdef1.xdc [current_fileset -constrset]
+launch_runs synth_1 -jobs 16
+wait_on_run synth_1
+open_run synth_1 -name synth_1
+write_checkpoint -force overlay.dcp
 
 #launch_runs impl_1 -to_step write_device_image -jobs 16
 #wait_on_run impl_1
