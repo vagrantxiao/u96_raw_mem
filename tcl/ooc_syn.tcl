@@ -1,6 +1,6 @@
 set top_name vadd_bw
 
-set dir "../vadd_bandwidth1r1w2"
+set dir "../v/vadd_bandwidth28r28w"
 set contents [glob -nocomplain -directory $dir *]
 foreach item $contents {
   if { [regexp {.*\.tcl} $item] } {

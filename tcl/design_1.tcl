@@ -310,26 +310,208 @@ proc create_root_design { parentCell } {
   set_property -dict [list \
     CONFIG.NUM_MI {0} \
     CONFIG.NUM_NMI {1} \
-    CONFIG.NUM_SI {2} \
+    CONFIG.NUM_SI {28} \
   ] $axi_noc_1
 
 
   set_property -dict [ list \
-   CONFIG.CONNECTIONS {M00_INI {read_bw {1720} write_bw {1720} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
    CONFIG.DEST_IDS {} \
    CONFIG.NOC_PARAMS {} \
    CONFIG.CATEGORY {pl} \
  ] [get_bd_intf_pins /axi_noc_1/S00_AXI]
 
   set_property -dict [ list \
-   CONFIG.CONNECTIONS {M00_INI { read_bw {1720} write_bw {1720}}} \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
    CONFIG.DEST_IDS {} \
    CONFIG.NOC_PARAMS {} \
    CONFIG.CATEGORY {pl} \
  ] [get_bd_intf_pins /axi_noc_1/S01_AXI]
 
   set_property -dict [ list \
-   CONFIG.ASSOCIATED_BUSIF {S00_AXI:S01_AXI} \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S02_AXI]
+
+  set_property -dict [ list \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S03_AXI]
+
+  set_property -dict [ list \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S04_AXI]
+
+  set_property -dict [ list \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S05_AXI]
+
+  set_property -dict [ list \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S06_AXI]
+
+  set_property -dict [ list \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S07_AXI]
+
+  set_property -dict [ list \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S08_AXI]
+
+  set_property -dict [ list \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S09_AXI]
+
+  set_property -dict [ list \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S10_AXI]
+
+  set_property -dict [ list \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S11_AXI]
+
+  set_property -dict [ list \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S12_AXI]
+
+  set_property -dict [ list \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S13_AXI]
+
+  set_property -dict [ list \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S14_AXI]
+
+  set_property -dict [ list \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S15_AXI]
+
+  set_property -dict [ list \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S16_AXI]
+
+  set_property -dict [ list \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S17_AXI]
+
+  set_property -dict [ list \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S18_AXI]
+
+  set_property -dict [ list \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S19_AXI]
+
+  set_property -dict [ list \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S20_AXI]
+
+  set_property -dict [ list \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S21_AXI]
+
+  set_property -dict [ list \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S22_AXI]
+
+  set_property -dict [ list \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S23_AXI]
+
+  set_property -dict [ list \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S24_AXI]
+
+  set_property -dict [ list \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S25_AXI]
+
+  set_property -dict [ list \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S26_AXI]
+
+  set_property -dict [ list \
+   CONFIG.CONNECTIONS {M00_INI { read_bw {100} write_bw {100} read_avg_burst {4} write_avg_burst {4}}} \
+   CONFIG.DEST_IDS {} \
+   CONFIG.NOC_PARAMS {} \
+   CONFIG.CATEGORY {pl} \
+ ] [get_bd_intf_pins /axi_noc_1/S27_AXI]
+
+  set_property -dict [ list \
+   CONFIG.ASSOCIATED_BUSIF {S00_AXI:S01_AXI:S02_AXI:S03_AXI:S04_AXI:S05_AXI:S06_AXI:S07_AXI:S08_AXI:S09_AXI:S10_AXI:S11_AXI:S12_AXI:S13_AXI:S14_AXI:S15_AXI:S16_AXI:S17_AXI:S18_AXI:S19_AXI:S20_AXI:S21_AXI:S22_AXI:S23_AXI:S24_AXI:S25_AXI:S26_AXI:S27_AXI} \
  ] [get_bd_pins /axi_noc_1/aclk0]
 
   # Create instance: proc_sys_reset_0, and set properties
@@ -361,8 +543,111 @@ proc create_root_design { parentCell } {
 
   set_property -dict [ list \
    CONFIG.FREQ_HZ {99999001} \
-   CONFIG.CLK_DOMAIN {bd_70da_pspmc_0_0_pl0_ref_clk} \
- ] [get_bd_intf_pins /vadd_bw_0/m_axi_wmem0]
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem1]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem2]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem3]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem4]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem5]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem6]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem7]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem8]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem9]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem10]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem11]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem12]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem13]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem14]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem15]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem16]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem17]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem18]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem19]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem20]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem21]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem22]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem23]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem24]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem25]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem26]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {99999001} \
+ ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem27]
 
   set_property -dict [ list \
    CONFIG.FREQ_HZ {99999001} \
@@ -410,7 +695,33 @@ proc create_root_design { parentCell } {
   connect_bd_intf_net -intf_net ddr4_c0_sysclk_1 [get_bd_intf_ports ddr4_c0_sysclk] [get_bd_intf_pins axi_noc_0/sys_clk0]
   connect_bd_intf_net -intf_net smartconnect_0_M00_AXI [get_bd_intf_pins smartconnect_0/M00_AXI] [get_bd_intf_pins vadd_bw_0/s_axi_control]
   connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem0 [get_bd_intf_pins axi_noc_1/S00_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem0]
-  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_wmem0 [get_bd_intf_pins axi_noc_1/S01_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_wmem0]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem1 [get_bd_intf_pins axi_noc_1/S01_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem1]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem2 [get_bd_intf_pins axi_noc_1/S02_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem2]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem3 [get_bd_intf_pins axi_noc_1/S03_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem3]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem4 [get_bd_intf_pins axi_noc_1/S04_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem4]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem5 [get_bd_intf_pins axi_noc_1/S05_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem5]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem6 [get_bd_intf_pins axi_noc_1/S06_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem6]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem7 [get_bd_intf_pins axi_noc_1/S07_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem7]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem8 [get_bd_intf_pins axi_noc_1/S08_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem8]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem9 [get_bd_intf_pins axi_noc_1/S09_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem9]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem10 [get_bd_intf_pins axi_noc_1/S10_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem10]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem11 [get_bd_intf_pins axi_noc_1/S11_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem11]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem12 [get_bd_intf_pins axi_noc_1/S12_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem12]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem13 [get_bd_intf_pins axi_noc_1/S13_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem13]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem14 [get_bd_intf_pins axi_noc_1/S14_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem14]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem15 [get_bd_intf_pins axi_noc_1/S15_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem15]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem16 [get_bd_intf_pins axi_noc_1/S16_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem16]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem17 [get_bd_intf_pins axi_noc_1/S17_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem17]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem18 [get_bd_intf_pins axi_noc_1/S18_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem18]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem19 [get_bd_intf_pins axi_noc_1/S19_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem19]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem20 [get_bd_intf_pins axi_noc_1/S20_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem20]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem21 [get_bd_intf_pins axi_noc_1/S21_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem21]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem22 [get_bd_intf_pins axi_noc_1/S22_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem22]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem23 [get_bd_intf_pins axi_noc_1/S23_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem23]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem24 [get_bd_intf_pins axi_noc_1/S24_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem24]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem25 [get_bd_intf_pins axi_noc_1/S25_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem25]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem26 [get_bd_intf_pins axi_noc_1/S26_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem26]
+  connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem27 [get_bd_intf_pins axi_noc_1/S27_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem27]
   connect_bd_intf_net -intf_net versal_cips_0_FPD_CCI_NOC_0 [get_bd_intf_pins axi_noc_0/S00_AXI] [get_bd_intf_pins versal_cips_0/FPD_CCI_NOC_0]
   connect_bd_intf_net -intf_net versal_cips_0_FPD_CCI_NOC_1 [get_bd_intf_pins axi_noc_0/S01_AXI] [get_bd_intf_pins versal_cips_0/FPD_CCI_NOC_1]
   connect_bd_intf_net -intf_net versal_cips_0_FPD_CCI_NOC_2 [get_bd_intf_pins axi_noc_0/S02_AXI] [get_bd_intf_pins versal_cips_0/FPD_CCI_NOC_2]
@@ -431,7 +742,33 @@ proc create_root_design { parentCell } {
 
   # Create address segments
   assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem0] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
-  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_wmem0] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem1] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem10] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem11] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem12] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem13] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem14] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem15] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem16] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem17] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem18] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem19] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem2] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem20] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem21] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem22] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem23] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem24] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem25] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem26] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem27] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem3] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem4] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem5] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem6] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem7] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem8] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
+  assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem9] [get_bd_addr_segs axi_noc_0/S00_INI/C0_DDR_LOW0] -force
   assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces versal_cips_0/FPD_CCI_NOC_0] [get_bd_addr_segs axi_noc_0/S00_AXI/C0_DDR_LOW0] -force
   assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces versal_cips_0/FPD_CCI_NOC_1] [get_bd_addr_segs axi_noc_0/S01_AXI/C0_DDR_LOW0] -force
   assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces versal_cips_0/FPD_CCI_NOC_2] [get_bd_addr_segs axi_noc_0/S02_AXI/C0_DDR_LOW0] -force
@@ -443,6 +780,7 @@ proc create_root_design { parentCell } {
   # Restore current instance
   current_bd_instance $oldCurInst
 
+  validate_bd_design
   save_bd_design
 }
 # End of create_root_design()
@@ -454,6 +792,4 @@ proc create_root_design { parentCell } {
 
 create_root_design ""
 
-
-common::send_gid_msg -ssname BD::TCL -id 2053 -severity "WARNING" "This Tcl script was generated from a block design that has not been validated. It is possible that design <$design_name> may result in errors during validation."
 
