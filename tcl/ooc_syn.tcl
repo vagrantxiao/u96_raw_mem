@@ -16,7 +16,7 @@ set logFileId [open ./runOOC.log "w"]
 set start_time [clock seconds]
 set_param general.maxThreads  8 
 synth_design -top $top_name -part xcvc1902-vsvd1760-2MP-e-S -mode out_of_context
-write_checkpoint -force ./checkpoint/$top_name.dcp
+write_checkpoint -force $top_name.dcp
 set end_time [clock seconds]
 set total_seconds [expr $end_time - $start_time]
 puts $logFileId "syn: $total_seconds seconds"
