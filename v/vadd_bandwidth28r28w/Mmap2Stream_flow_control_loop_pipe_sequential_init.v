@@ -75,8 +75,8 @@ end
 
 assign ap_loop_init = ap_loop_init_int & ap_start;
 
-// if no ap_continue port and current module is not top module, 
-// ap_done handshakes with ap_start. Internally, flow control sends out 
+// if no ap_continue port and current module is not top module,
+// ap_done handshakes with ap_start. Internally, flow control sends out
 // ap_conintue_int = 1'b1 so the ap_done_int is asserted high for 1 clock cycle.
 // ap_done_cache is used to record ap_done_int, and de-assert if ap_start_int
 // is asserted, so DUT can start the next run
@@ -102,4 +102,3 @@ begin
 end
 
 endmodule
-        

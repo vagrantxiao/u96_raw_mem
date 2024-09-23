@@ -1,4 +1,4 @@
-`timescale 1 ns / 1 ps 
+`timescale 1 ns / 1 ps
 
 (* CORE_GENERATION_INFO = "vadd_bw_vadd_bw,hls_ip_2022_2,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=0,HLS_INPUT_PART=xcu50-fsvh2104-2-e,HLS_INPUT_CLOCK=3.330000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=1.000000,HLS_SYN_LAT=0,HLS_SYN_TPT=none,HLS_SYN_MEM=0,HLS_SYN_DSP=0,HLS_SYN_FF=246,HLS_SYN_LUT=424,HLS_VERSION=2022_2}" *)
 
@@ -485,4 +485,3 @@ module vadd_bw
   assign ap_rst_n_inv = (~ap_rst_n);
 
 endmodule
-

@@ -23,4 +23,3 @@ set_property top design_1_wrapper [current_fileset]
 #launch_runs impl_1 -to_step write_bitstream -jobs 16
 #wait_on_run impl_1
 #write_hw_platform -fixed -include_bit -force -file ${_prj_name_}/design_1_wrapper.xsa
-

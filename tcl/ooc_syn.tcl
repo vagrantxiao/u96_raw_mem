@@ -14,7 +14,7 @@ set_param general.maxThreads  8
 set_property XPM_LIBRARIES {XPM_CDC XPM_MEMORY XPM_FIFO} [current_project]
 set logFileId [open ./runOOC.log "w"]
 set start_time [clock seconds]
-set_param general.maxThreads  8 
+set_param general.maxThreads  8
 synth_design -top $top_name -part xcvc1902-vsvd1760-2MP-e-S -mode out_of_context
 write_checkpoint -force $top_name.dcp
 set end_time [clock seconds]

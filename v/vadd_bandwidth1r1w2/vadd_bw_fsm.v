@@ -109,8 +109,8 @@ module vadd_bw_fsm
       if(Mmap2Stream_0__state == 2'b00) begin
         if(Mmap2Stream_0__ap_start_global__q0) begin
           Mmap2Stream_0__state <= 2'b01;
-        end 
-      end 
+        end
+      end
       if(Mmap2Stream_0__state == 2'b01) begin
         if(Mmap2Stream_0__ap_ready) begin
           if(Mmap2Stream_0__ap_done) begin
@@ -118,18 +118,18 @@ module vadd_bw_fsm
           end else begin
             Mmap2Stream_0__state <= 2'b11;
           end
-        end 
-      end 
+        end
+      end
       if(Mmap2Stream_0__state == 2'b11) begin
         if(Mmap2Stream_0__ap_done) begin
           Mmap2Stream_0__state <= 2'b10;
-        end 
-      end 
+        end
+      end
       if(Mmap2Stream_0__state == 2'b10) begin
         if(Mmap2Stream_0__ap_done_global__q0) begin
           Mmap2Stream_0__state <= 2'b00;
-        end 
-      end 
+        end
+      end
     end
   end
 
@@ -147,8 +147,8 @@ module vadd_bw_fsm
       if(Stream2Mmap_0__state == 2'b00) begin
         if(Stream2Mmap_0__ap_start_global__q0) begin
           Stream2Mmap_0__state <= 2'b01;
-        end 
-      end 
+        end
+      end
       if(Stream2Mmap_0__state == 2'b01) begin
         if(Stream2Mmap_0__ap_ready) begin
           if(Stream2Mmap_0__ap_done) begin
@@ -156,18 +156,18 @@ module vadd_bw_fsm
           end else begin
             Stream2Mmap_0__state <= 2'b11;
           end
-        end 
-      end 
+        end
+      end
       if(Stream2Mmap_0__state == 2'b11) begin
         if(Stream2Mmap_0__ap_done) begin
           Stream2Mmap_0__state <= 2'b10;
-        end 
-      end 
+        end
+      end
       if(Stream2Mmap_0__state == 2'b10) begin
         if(Stream2Mmap_0__ap_done_global__q0) begin
           Stream2Mmap_0__state <= 2'b00;
-        end 
-      end 
+        end
+      end
     end
   end
 
@@ -184,8 +184,8 @@ module vadd_bw_fsm
       if(yshift_0__state == 2'b00) begin
         if(yshift_0__ap_start_global__q0) begin
           yshift_0__state <= 2'b01;
-        end 
-      end 
+        end
+      end
       if(yshift_0__state == 2'b01) begin
         if(yshift_0__ap_ready) begin
           if(yshift_0__ap_done) begin
@@ -193,18 +193,18 @@ module vadd_bw_fsm
           end else begin
             yshift_0__state <= 2'b11;
           end
-        end 
-      end 
+        end
+      end
       if(yshift_0__state == 2'b11) begin
         if(yshift_0__ap_done) begin
           yshift_0__state <= 2'b10;
-        end 
-      end 
+        end
+      end
       if(yshift_0__state == 2'b10) begin
         if(yshift_0__ap_done_global__q0) begin
           yshift_0__state <= 2'b00;
-        end 
-      end 
+        end
+      end
     end
   end
 
@@ -218,12 +218,12 @@ module vadd_bw_fsm
         2'b00: begin
           if(ap_start__q0) begin
             tapa_state <= 2'b01;
-          end 
+          end
         end
         2'b01: begin
           if(Mmap2Stream_0__is_done__q0 && Stream2Mmap_0__is_done__q0 && yshift_0__is_done__q0) begin
             tapa_state <= 2'b10;
-          end 
+          end
         end
         2'b10: begin
           tapa_state <= 2'b00;
@@ -247,4 +247,3 @@ module vadd_bw_fsm
   assign ap_done__q0 = (tapa_state == 2'b10);
 
 endmodule
-

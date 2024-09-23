@@ -38,7 +38,7 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 # source design_1_script.tcl
 
 
-# The design that will be created by this Tcl script contains the following 
+# The design that will be created by this Tcl script contains the following
 # module references:
 # vadd_bw
 
@@ -96,7 +96,7 @@ if { ${design_name} eq "" } {
    set errMsg "Design <$design_name> already exists in your project, please set the variable <design_name> to another value."
    set nRet 1
 } elseif { [get_files -quiet ${design_name}.bd] ne "" } {
-   # USE CASES: 
+   # USE CASES:
    #    6) Current opened design, has components, but diff names, design_name exists in project.
    #    7) No opened design, design_name exists in project.
 
@@ -130,7 +130,7 @@ set bCheckIPsPassed 1
 ##################################################################
 set bCheckIPs 1
 if { $bCheckIPs == 1 } {
-   set list_check_ips "\ 
+   set list_check_ips "\
 xilinx.com:ip:smartconnect:1.0\
 xilinx.com:ip:proc_sys_reset:5.0\
 xilinx.com:ip:zynq_ultra_ps_e:3.4\
@@ -158,7 +158,7 @@ xilinx.com:ip:zynq_ultra_ps_e:3.4\
 ##################################################################
 set bCheckModules 1
 if { $bCheckModules == 1 } {
-   set list_check_mods "\ 
+   set list_check_mods "\
 vadd_bw\
 "
 
@@ -251,7 +251,7 @@ proc create_root_design { parentCell } {
      catch {common::send_gid_msg -ssname BD::TCL -id 2096 -severity "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
    }
-  
+
   set_property -dict [ list \
    CONFIG.CLK_DOMAIN {design_1_zynq_ultra_ps_e_0_0_pl_clk0} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem0]
@@ -769,5 +769,3 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
 ##################################################################
 
 create_root_design ""
-
-

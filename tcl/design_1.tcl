@@ -38,7 +38,7 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 # source design_1_script.tcl
 
 
-# The design that will be created by this Tcl script contains the following 
+# The design that will be created by this Tcl script contains the following
 # module references:
 # vadd_bw
 
@@ -96,7 +96,7 @@ if { ${design_name} eq "" } {
    set errMsg "Design <$design_name> already exists in your project, please set the variable <design_name> to another value."
    set nRet 1
 } elseif { [get_files -quiet ${design_name}.bd] ne "" } {
-   # USE CASES: 
+   # USE CASES:
    #    6) Current opened design, has components, but diff names, design_name exists in project.
    #    7) No opened design, design_name exists in project.
 
@@ -130,7 +130,7 @@ set bCheckIPsPassed 1
 ##################################################################
 set bCheckIPs 1
 if { $bCheckIPs == 1 } {
-   set list_check_ips "\ 
+   set list_check_ips "\
 xilinx.com:ip:axi_noc:1.0\
 xilinx.com:ip:proc_sys_reset:5.0\
 xilinx.com:ip:smartconnect:1.0\
@@ -159,7 +159,7 @@ xilinx.com:ip:versal_cips:3.3\
 ##################################################################
 set bCheckModules 1
 if { $bCheckModules == 1 } {
-   set list_check_mods "\ 
+   set list_check_mods "\
 vadd_bw\
 "
 
@@ -535,122 +535,122 @@ proc create_root_design { parentCell } {
      catch {common::send_gid_msg -ssname BD::TCL -id 2096 -severity "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
      return 1
    }
-  
+
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
    CONFIG.CLK_DOMAIN {bd_70da_pspmc_0_0_pl0_ref_clk} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem0]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem1]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem2]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem3]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem4]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem5]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem6]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem7]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem8]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem9]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem10]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem11]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem12]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem13]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem14]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem15]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem16]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem17]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem18]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem19]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem20]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem21]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem22]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem23]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem24]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem25]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem26]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem27]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
    CONFIG.CLK_DOMAIN {bd_70da_pspmc_0_0_pl0_ref_clk} \
  ] [get_bd_intf_pins /vadd_bw_0/s_axi_control]
 
@@ -667,7 +667,7 @@ proc create_root_design { parentCell } {
       CLOCK_MODE {Custom} \
       DDR_MEMORY_MODE {Custom} \
       DEBUG_MODE {JTAG} \
-      PMC_CRP_PL0_REF_CTRL_FREQMHZ {250} \
+      PMC_CRP_PL0_REF_CTRL_FREQMHZ {100} \
       PMC_USE_PMC_NOC_AXI0 {1} \
       PS_HSDP_EGRESS_TRAFFIC {JTAG} \
       PS_HSDP_INGRESS_TRAFFIC {JTAG} \
@@ -791,5 +791,3 @@ proc create_root_design { parentCell } {
 ##################################################################
 
 create_root_design ""
-
-

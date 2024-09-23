@@ -1,9 +1,12 @@
+# Copyright (c) 2024 RapidStream Design Automation, Inc. and contributors.  All rights reserved.
+# The contributor(s) of this file has/have agreed to the RapidStream Contributor License Agreement.
+
 
 TEMP_DIR := $(CURDIR)/build
-VPP      := vivado -mode batch -source 
+VPP      := vivado -mode batch -source
 OVERLAY  := $(TEMP_DIR)/overlay.dcp
 OOC      := $(TEMP_DIR)/vadd_bw.dcp
-PROVERLAY:= $(TEMP_DIR)/proverlay.dcp
+PROVERLAY:= $(TEMP_DIR)/pr_overlay.dcp
 m=$(shell date)
 
 all:$(PROVERLAY)

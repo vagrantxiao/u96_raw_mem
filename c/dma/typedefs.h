@@ -1,3 +1,6 @@
+// Copyright (c) 2024 RapidStream Design Automation, Inc. and contributors.  All rights reserved.
+// The contributor(s) of this file has/have agreed to the RapidStream Contributor License Agreement.
+
 #include "xrtcpsu.h"		/* RTCPSU device driver */
 
 
@@ -91,6 +94,3 @@
 #if defined(XPAR_UARTNS550_0_BASEADDR)
 static void Uart550_Setup(void);
 #endif
-
-
-

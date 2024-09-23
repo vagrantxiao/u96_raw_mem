@@ -94,5 +94,3 @@ int main(void)
 	xil_printf("Optical_flow is completed\n\r");
 	return XST_SUCCESS;
 }
-
-
