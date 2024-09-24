@@ -4,7 +4,7 @@
 // Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 // ==============================================================
 `timescale 1ns/1ps
-module vadd_bw_control_s_axi
+module addr_config_control_s_axi
 #(parameter
     C_S_AXI_ADDR_WIDTH = 6,
     C_S_AXI_DATA_WIDTH = 32
@@ -31,6 +31,7 @@ module vadd_bw_control_s_axi
     input  wire                          RREADY,
     output wire                          interrupt,
     output wire [63:0]                   rmem0,
+    output wire [63:0]                   rmem1,
     output wire [63:0]                   n,
     output wire                          ap_start,
     input  wire                          ap_done,
@@ -60,11 +61,16 @@ module vadd_bw_control_s_axi
 // 0x14 : Data signal of rmem0
 //        bit 31~0 - rmem0[63:32] (Read/Write)
 // 0x18 : reserved
-// 0x1c : Data signal of n
-//        bit 31~0 - n[31:0] (Read/Write)
-// 0x20 : Data signal of n
-//        bit 31~0 - n[63:32] (Read/Write)
+// 0x1c : Data signal of rmem1
+//        bit 31~0 - rmem1[31:0] (Read/Write)
+// 0x20 : Data signal of rmem1
+//        bit 31~0 - rmem1[63:32] (Read/Write)
 // 0x24 : reserved
+// 0x28 : Data signal of n
+//        bit 31~0 - n[31:0] (Read/Write)
+// 0x2c : Data signal of n
+//        bit 31~0 - n[63:32] (Read/Write)
+// 0x30 : reserved
 // (SC = Self Clear, COR = Clear on Read, TOW = Toggle on Write, COH = Clear on Handshake)
 
 //------------------------Parameter----------------------
@@ -76,9 +82,12 @@ localparam
     ADDR_RMEM0_DATA_0 = 6'h10,
     ADDR_RMEM0_DATA_1 = 6'h14,
     ADDR_RMEM0_CTRL   = 6'h18,
-    ADDR_N_DATA_0     = 6'h1c,
-    ADDR_N_DATA_1     = 6'h20,
-    ADDR_N_CTRL       = 6'h24,
+    ADDR_RMEM1_DATA_0 = 6'h1c,
+    ADDR_RMEM1_DATA_1 = 6'h20,
+    ADDR_RMEM1_CTRL   = 6'h24,
+    ADDR_N_DATA_0     = 6'h28,
+    ADDR_N_DATA_1     = 6'h2c,
+    ADDR_N_CTRL       = 6'h30,
     WRIDLE            = 2'd0,
     WRDATA            = 2'd1,
     WRRESP            = 2'd2,
@@ -116,6 +125,7 @@ localparam
     reg                           int_ier = 1'b0;
     reg                           int_isr = 1'b0;
     reg  [63:0]                   int_rmem0 = 'b0;
+    reg  [63:0]                   int_rmem1 = 'b0;
     reg  [63:0]                   int_n = 'b0;
 
 //------------------------Instantiation------------------
@@ -232,6 +242,12 @@ always @(posedge ACLK) begin
                 ADDR_RMEM0_DATA_1: begin
                     rdata <= int_rmem0[63:32];
                 end
+                ADDR_RMEM1_DATA_0: begin
+                    rdata <= int_rmem1[31:0];
+                end
+                ADDR_RMEM1_DATA_1: begin
+                    rdata <= int_rmem1[63:32];
+                end
                 ADDR_N_DATA_0: begin
                     rdata <= int_n[31:0];
                 end
@@ -251,6 +267,7 @@ assign task_ap_done      = (ap_done && !auto_restart_status) || auto_restart_don
 assign task_ap_ready     = ap_ready && !int_auto_restart;
 assign auto_restart_done = auto_restart_status && (ap_idle && !int_ap_idle);
 assign rmem0             = int_rmem0;
+assign rmem1             = int_rmem1;
 assign n                 = int_n;
 // int_interrupt
 always @(posedge ACLK) begin
@@ -391,6 +408,26 @@ always @(posedge ACLK) begin
     else if (ACLK_EN) begin
         if (w_hs && waddr == ADDR_RMEM0_DATA_1)
             int_rmem0[63:32] <= (WDATA[31:0] & wmask) | (int_rmem0[63:32] & ~wmask);
+    end
+end
+
+// int_rmem1[31:0]
+always @(posedge ACLK) begin
+    if (ARESET)
+        int_rmem1[31:0] <= 0;
+    else if (ACLK_EN) begin
+        if (w_hs && waddr == ADDR_RMEM1_DATA_0)
+            int_rmem1[31:0] <= (WDATA[31:0] & wmask) | (int_rmem1[31:0] & ~wmask);
+    end
+end
+
+// int_rmem1[63:32]
+always @(posedge ACLK) begin
+    if (ARESET)
+        int_rmem1[63:32] <= 0;
+    else if (ACLK_EN) begin
+        if (w_hs && waddr == ADDR_RMEM1_DATA_1)
+            int_rmem1[63:32] <= (WDATA[31:0] & wmask) | (int_rmem1[63:32] & ~wmask);
     end
 end
 

@@ -8,7 +8,7 @@
 `timescale 1ns/1ps
 `default_nettype none
 
-module Stream2Mmap_mmap_m_axi
+module Mmap2Stream_mmap_m_axi
 #(parameter
     CONSERVATIVE            = 0,
     NUM_READ_OUTSTANDING    = 2,
@@ -33,7 +33,7 @@ module Stream2Mmap_mmap_m_axi
     USER_RFIFONUM_WIDTH     = 6,
     MAXI_BUFFER_IMPL        = "block"
 )(
-    
+
     // system signal
     input  wire                               ACLK,
     input  wire                               ARESET,
@@ -134,10 +134,10 @@ module Stream2Mmap_mmap_m_axi
     wire                            RVALID_Dummy;
     wire                            RREADY_Dummy;
     wire                            RBURST_READY_Dummy;
-    
+
 //------------------------Instantiation------------------
-    // Stream2Mmap_mmap_m_axi_store
-    Stream2Mmap_mmap_m_axi_store #(
+    // Mmap2Stream_mmap_m_axi_store
+    Mmap2Stream_mmap_m_axi_store #(
         .C_TARGET_ADDR           ( C_TARGET_ADDR ),
         .NUM_WRITE_OUTSTANDING   ( NUM_WRITE_OUTSTANDING ),
         .MAX_WRITE_BURST_LENGTH  ( MAX_WRITE_BURST_LENGTH ),
@@ -172,8 +172,8 @@ module Stream2Mmap_mmap_m_axi
         .out_HLS_BVALID          ( I_BVALID ),
         .in_HLS_BREADY           ( I_BREADY ));
 
-    // Stream2Mmap_mmap_m_axi_load
-    Stream2Mmap_mmap_m_axi_load #(
+    // Mmap2Stream_mmap_m_axi_load
+    Mmap2Stream_mmap_m_axi_load #(
         .C_TARGET_ADDR           ( C_TARGET_ADDR ),
         .NUM_READ_OUTSTANDING    ( NUM_READ_OUTSTANDING ),
         .MAX_READ_BURST_LENGTH   ( MAX_READ_BURST_LENGTH ),
@@ -206,8 +206,8 @@ module Stream2Mmap_mmap_m_axi
         .in_HLS_RREADY           ( I_RREADY ),
         .out_HLS_RFIFONUM        ( I_RFIFONUM ));
 
-    // Stream2Mmap_mmap_m_axi_write
-    Stream2Mmap_mmap_m_axi_write #(
+    // Mmap2Stream_mmap_m_axi_write
+    Mmap2Stream_mmap_m_axi_write #(
         .CONSERVATIVE            ( CONSERVATIVE),
         .C_M_AXI_ID_WIDTH        ( C_M_AXI_ID_WIDTH ),
         .C_M_AXI_AWUSER_WIDTH    ( C_M_AXI_AWUSER_WIDTH ),
@@ -235,8 +235,8 @@ module Stream2Mmap_mmap_m_axi
         .out_BUS_AWUSER          ( AWUSER ),
         .out_BUS_AWADDR          ( AWADDR ),
         .out_BUS_AWLEN           ( AWLEN ),
-        
-        
+
+
         .out_BUS_AWVALID         ( AWVALID ),
         .in_BUS_AWREADY          ( AWREADY ),
         .out_BUS_WID             ( WID),
@@ -244,16 +244,16 @@ module Stream2Mmap_mmap_m_axi
         .out_BUS_WDATA           ( WDATA ),
         .out_BUS_WSTRB           ( WSTRB ),
         .out_BUS_WLAST           ( WLAST ),
-        
-        
+
+
         .out_BUS_WVALID          ( WVALID ),
         .in_BUS_WREADY           ( WREADY ),
         .in_BUS_BID              ( BID ),
         .in_BUS_BRESP            ( BRESP ),
         .in_BUS_BUSER            ( BUSER ),
         .in_BUS_BVALID           ( BVALID ),
-        
-        
+
+
         .out_BUS_BREADY          ( BREADY ),
         .in_HLS_AWVALID          ( AWVALID_Dummy ),
         .out_HLS_AWREADY         ( AWREADY_Dummy ),
@@ -266,8 +266,8 @@ module Stream2Mmap_mmap_m_axi
         .out_HLS_BVALID          ( BVALID_Dummy ),
         .in_HLS_BREADY           ( BREADY_Dummy ));
 
-    // Stream2Mmap_mmap_m_axi_read
-    Stream2Mmap_mmap_m_axi_read #(
+    // Mmap2Stream_mmap_m_axi_read
+    Mmap2Stream_mmap_m_axi_read #(
         .C_M_AXI_ID_WIDTH         ( C_M_AXI_ID_WIDTH ),
         .C_M_AXI_ARUSER_WIDTH     ( C_M_AXI_ARUSER_WIDTH ),
         .C_M_AXI_RUSER_WIDTH      ( C_M_AXI_RUSER_WIDTH ),
@@ -293,8 +293,8 @@ module Stream2Mmap_mmap_m_axi
         .out_BUS_ARQOS            ( ARQOS ),
         .out_BUS_ARREGION         ( ARREGION ),
         .out_BUS_ARUSER           ( ARUSER ),
-        
-        
+
+
         .out_BUS_ARVALID          ( ARVALID ),
         .in_BUS_ARREADY           ( ARREADY ),
         .in_BUS_RID               ( RID ),
@@ -303,8 +303,8 @@ module Stream2Mmap_mmap_m_axi
         .in_BUS_RLAST             ( RLAST ),
         .in_BUS_RUSER             ( RUSER ),
         .in_BUS_RVALID            ( RVALID ),
-        
-        
+
+
         .out_BUS_RREADY           ( RREADY ),
         .in_HLS_ARVALID           ( ARVALID_Dummy ),
         .out_HLS_ARREADY          ( ARREADY_Dummy ),
@@ -316,13 +316,13 @@ module Stream2Mmap_mmap_m_axi
         .out_HLS_RDATA            ( RDATA_Dummy ),
         .out_HLS_RLAST            ( RLAST_Dummy ));
 
-    
+
 endmodule
 `default_nettype wire// 67d7842dbbe25473c3c32b93c0da8047785f30d78e8a024de1b57352245f9689
 
 `timescale 1ns/1ps
 
-module Stream2Mmap_mmap_m_axi_load
+module Mmap2Stream_mmap_m_axi_load
 #(parameter
     C_TARGET_ADDR                         = 32'h00000000,
     NUM_READ_OUTSTANDING                  = 2,
@@ -424,7 +424,7 @@ module Stream2Mmap_mmap_m_axi_load
     reg                            ready_for_outstanding;
 
 //------------------------Instantiation------------------
-    Stream2Mmap_mmap_m_axi_fifo #(
+    Mmap2Stream_mmap_m_axi_fifo #(
         .DATA_WIDTH        (USER_AW + 32),
         .ADDR_WIDTH        (log2(USER_MAXREQS)),
         .DEPTH             (USER_MAXREQS)
@@ -442,7 +442,7 @@ module Stream2Mmap_mmap_m_axi_load
 
     // ===================================================================
     // start of ARADDR PREPROCESSOR
-    
+
     assign next_rreq       = rreq_valid && ready_for_rreq;
     assign ready_for_rreq  = ~tmp_valid || (in_AXI_ARREADY && rreq_ready);
 
@@ -465,8 +465,8 @@ module Stream2Mmap_mmap_m_axi_load
             end
         end
     end
- 
-    always @(posedge ACLK) 
+
+    always @(posedge ACLK)
     begin
         if (ARESET)
             tmp_valid <= 1'b0;
@@ -481,7 +481,7 @@ module Stream2Mmap_mmap_m_axi_load
     // end of ARADDR PREPROCESSOR
     // ===================================================================
 
-    Stream2Mmap_mmap_m_axi_fifo #(
+    Mmap2Stream_mmap_m_axi_fifo #(
         .MEM_STYLE         (BUFFER_IMPL),
         .DATA_WIDTH        (BUS_DATA_WIDTH + 2),
         .ADDR_WIDTH        (log2(RBUFF_DEPTH)),
@@ -500,7 +500,7 @@ module Stream2Mmap_mmap_m_axi_load
 
     assign out_AXI_RBURST_READY = ready_for_outstanding;
 
-    always @(posedge ACLK) 
+    always @(posedge ACLK)
     begin
         if (ARESET)
             ready_for_outstanding <= 1'b0;
@@ -550,10 +550,10 @@ module Stream2Mmap_mmap_m_axi_load
         reg  [BUS_DATA_WIDTH-1 : 0] data_buf;
         reg                         data_valid;
 
-        reg  [USER_RFIFONUM_WIDTH-1:0] rdata_nvalid; 
+        reg  [USER_RFIFONUM_WIDTH-1:0] rdata_nvalid;
         reg  [SPLIT_ALIGN : 0]      data_nvalid;
         wire [SPLIT_ALIGN : 0]      split_nvalid;
-        
+
         wire [SPLIT_ALIGN-1 : 0]    split_cnt;
         reg  [SPLIT_ALIGN-1 : 0]    split_cnt_buf;
 
@@ -562,7 +562,7 @@ module Stream2Mmap_mmap_m_axi_load
         wire                        last_split;
 
         // Recording the offset of start & end address to extract the expect data from beats when USER_DW < BUS_DW.
-        Stream2Mmap_mmap_m_axi_fifo #(
+        Mmap2Stream_mmap_m_axi_fifo #(
             .DATA_WIDTH         (2*SPLIT_ALIGN),
             .ADDR_WIDTH         (log2(NUM_READ_OUTSTANDING)),
             .DEPTH              (NUM_READ_OUTSTANDING)
@@ -610,7 +610,7 @@ module Stream2Mmap_mmap_m_axi_load
         begin
             if (ARESET)
                 split_cnt_buf <= 0;
-            else if (ACLK_EN) begin 
+            else if (ACLK_EN) begin
                 if (last_split)
                     split_cnt_buf <= 0;
                 else if (first_split || next_split)
@@ -679,7 +679,7 @@ module Stream2Mmap_mmap_m_axi_load
                     rdata_nvalid <= ((beat_nvalid - 1) << SPLIT_ALIGN);
             end
         end
-        
+
     end
     else begin : bus_narrow_gen
         localparam
@@ -698,9 +698,9 @@ module Stream2Mmap_mmap_m_axi_load
         wire                        last_pad;
         wire                        next_pad;
 
-        assign rreq_ready       = 1'b1; 
+        assign rreq_ready       = 1'b1;
         assign next_beat        = next_pad;
-        
+
         assign out_HLS_RDATA    = data_buf[USER_DW-1 : 0];
         assign out_HLS_RVALID   = data_valid;
         assign out_HLS_RFIFONUM = beat_nvalid[log2(RBUFF_DEPTH) : PAD_ALIGN] + (beat_nvalid[PAD_ALIGN-1:0] + data_nvalid) >> PAD_ALIGN;
@@ -724,7 +724,7 @@ module Stream2Mmap_mmap_m_axi_load
         assign pad_oh = (beat_valid == 0)  ?  0 :
                         (first_pad)        ?  1 :
                         pad_oh_reg;
- 
+
         always @(posedge ACLK)
         begin
             if (ARESET)
@@ -778,7 +778,7 @@ module Stream2Mmap_mmap_m_axi_load
 endmodule
 
 
-module Stream2Mmap_mmap_m_axi_store
+module Mmap2Stream_mmap_m_axi_store
 #(parameter
     C_TARGET_ADDR           = 32'h00000000,
     NUM_WRITE_OUTSTANDING   = 2,
@@ -830,9 +830,9 @@ module Stream2Mmap_mmap_m_axi_store
         USER_ADDR_ALIGN = log2(USER_DATA_BYTES),
         BUS_DATA_BYTES  = BUS_DATA_WIDTH / 8,
         BUS_ADDR_ALIGN  = log2(BUS_DATA_BYTES),
-        // write buffer size 
-        WBUFF_DEPTH     = max(MAX_WRITE_BURST_LENGTH * BUS_DATA_WIDTH / USER_DATA_WIDTH, 1),  
-        TARGET_ADDR     = C_TARGET_ADDR & (32'hffffffff << USER_ADDR_ALIGN); 
+        // write buffer size
+        WBUFF_DEPTH     = max(MAX_WRITE_BURST_LENGTH * BUS_DATA_WIDTH / USER_DATA_WIDTH, 1),
+        TARGET_ADDR     = C_TARGET_ADDR & (32'hffffffff << USER_ADDR_ALIGN);
 
 //------------------------Task and function--------------
 
@@ -898,7 +898,7 @@ module Stream2Mmap_mmap_m_axi_store
     wire                                ursp_write;
 
 //------------------------Instantiation------------------
-    Stream2Mmap_mmap_m_axi_fifo #(
+    Mmap2Stream_mmap_m_axi_fifo #(
         .DATA_WIDTH     (USER_AW + 32),
         .ADDR_WIDTH     (log2(USER_MAXREQS)),
         .DEPTH          (USER_MAXREQS)
@@ -936,8 +936,8 @@ module Stream2Mmap_mmap_m_axi_store
             end
         end
     end
- 
-    always @(posedge ACLK) 
+
+    always @(posedge ACLK)
     begin
         if (ARESET)
             tmp_valid <= 1'b0;
@@ -949,7 +949,7 @@ module Stream2Mmap_mmap_m_axi_store
 
     // ===================================================================
 
-    Stream2Mmap_mmap_m_axi_fifo #(
+    Mmap2Stream_mmap_m_axi_fifo #(
         .MEM_STYLE         (BUFFER_IMPL),
         .DATA_WIDTH        (USER_DW + USER_DW/8),
         .ADDR_WIDTH        (log2(WBUFF_DEPTH)),
@@ -1030,7 +1030,7 @@ module Stream2Mmap_mmap_m_axi_store
         reg                         data_valid;
 
         // Recording the offset of start & end address to align beats from data USER_DW < BUS_DW.
-        Stream2Mmap_mmap_m_axi_fifo #(
+        Mmap2Stream_mmap_m_axi_fifo #(
             .DATA_WIDTH             (2*PAD_ALIGN + BEAT_LEN_WIDTH),
             .ADDR_WIDTH             (log2(NUM_WRITE_OUTSTANDING)),
             .DEPTH                  (NUM_WRITE_OUTSTANDING)
@@ -1095,8 +1095,8 @@ module Stream2Mmap_mmap_m_axi_store
                 else if (next_pad && last_pad)
                     first_pad <= 1'b1;
             end
-        end 
-        
+        end
+
         assign pad_oh = (~wdata_valid)            ? 0                :
                         (first_pad && first_beat) ? 1 << head_offset :
                         (first_pad)?                1                :
@@ -1187,7 +1187,7 @@ module Stream2Mmap_mmap_m_axi_store
         wire                        last_split;
 
         // Recording the offset of start & end address to align beats from data USER_DW < BUS_DW.
-        Stream2Mmap_mmap_m_axi_fifo #(
+        Mmap2Stream_mmap_m_axi_fifo #(
             .DATA_WIDTH        (BEAT_LEN_WIDTH),
             .ADDR_WIDTH        (log2(NUM_WRITE_OUTSTANDING)),
             .DEPTH             (NUM_WRITE_OUTSTANDING)
@@ -1219,7 +1219,7 @@ module Stream2Mmap_mmap_m_axi_store
         assign first_split    = (split_cnt == 0) && wdata_valid && offset_valid && ready_for_data;
         assign last_split     = (split_cnt == (TOTAL_SPLIT - 1)) && ready_for_data;
         assign next_split     = (split_cnt != 0) && ready_for_data;
-        
+
         always @(posedge ACLK)
         begin
             if (ARESET)
@@ -1243,7 +1243,7 @@ module Stream2Mmap_mmap_m_axi_store
                     len_cnt <= len_cnt + 1;
             end
         end
- 
+
         always @(posedge ACLK)
         begin
             if (ACLK_EN) begin
@@ -1283,7 +1283,7 @@ module Stream2Mmap_mmap_m_axi_store
     // ===================================================================
 
     // generate response for all request (including request with invalid length)
-    Stream2Mmap_mmap_m_axi_fifo #(
+    Mmap2Stream_mmap_m_axi_fifo #(
         .DATA_WIDTH        (1),
         .ADDR_WIDTH        (log2(NUM_WRITE_OUTSTANDING)),
         .DEPTH             (NUM_WRITE_OUTSTANDING)
@@ -1299,7 +1299,7 @@ module Stream2Mmap_mmap_m_axi_store
         .if_dout           (wrsp_type), // 1 - valid length request, 0 - invalid length request
         .if_num_data_valid ());
 
-    Stream2Mmap_mmap_m_axi_fifo #(
+    Mmap2Stream_mmap_m_axi_fifo #(
         .DATA_WIDTH        (1),
         .ADDR_WIDTH        (log2(USER_MAXREQS)),
         .DEPTH             (USER_MAXREQS)
@@ -1329,7 +1329,7 @@ endmodule
 //
 
 
-module Stream2Mmap_mmap_m_axi_read
+module Mmap2Stream_mmap_m_axi_read
 #(parameter
     C_M_AXI_ID_WIDTH          = 1,
     C_M_AXI_ARUSER_WIDTH      = 1,
@@ -1456,7 +1456,7 @@ module Stream2Mmap_mmap_m_axi_read
 
 //------------------------AR channel begin---------------
 //------------------------Instantiation------------------
-    Stream2Mmap_mmap_m_axi_reg_slice #(
+    Mmap2Stream_mmap_m_axi_reg_slice #(
         .DATA_WIDTH     (BUS_ADDR_WIDTH + 32)
     ) rs_rreq (
         .clk            (ACLK),
@@ -1468,7 +1468,7 @@ module Stream2Mmap_mmap_m_axi_read
         .m_valid        (rreq_valid),
         .m_ready        (next_rreq));
 
-//------------------------Body---------------------------   
+//------------------------Body---------------------------
     assign ready_for_rreq = last_sect & next_sect | ~rreq_handling;
     assign next_rreq      = rreq_valid & ready_for_rreq;
 
@@ -1657,7 +1657,7 @@ module Stream2Mmap_mmap_m_axi_read
 
 //------------------------R channel begin----------------
 //------------------------Instantiation------------------
-    Stream2Mmap_mmap_m_axi_reg_slice #(
+    Mmap2Stream_mmap_m_axi_reg_slice #(
         .DATA_WIDTH     (BUS_DATA_WIDTH + 1)
     ) rs_rdata (
         .clk            (ACLK),
@@ -1669,7 +1669,7 @@ module Stream2Mmap_mmap_m_axi_read
         .m_valid        (data_valid),
         .m_ready        (data_ready));
 
-    Stream2Mmap_mmap_m_axi_fifo #(
+    Mmap2Stream_mmap_m_axi_fifo #(
         .DATA_WIDTH     (1),
         .ADDR_WIDTH     (log2(NUM_READ_OUTSTANDING)),
         .DEPTH          (NUM_READ_OUTSTANDING)
@@ -1685,7 +1685,7 @@ module Stream2Mmap_mmap_m_axi_read
         .if_dout        (),
         .if_num_data_valid());
 
-    Stream2Mmap_mmap_m_axi_fifo #(
+    Mmap2Stream_mmap_m_axi_fifo #(
         .DATA_WIDTH     (1),
         .ADDR_WIDTH     (log2(NUM_READ_OUTSTANDING)),
         .DEPTH          (NUM_READ_OUTSTANDING)
@@ -1713,7 +1713,7 @@ module Stream2Mmap_mmap_m_axi_read
 //------------------------R channel end------------------
 endmodule
 
-module Stream2Mmap_mmap_m_axi_write
+module Mmap2Stream_mmap_m_axi_write
 #(parameter
     CONSERVATIVE              = 0,
     C_M_AXI_ID_WIDTH          = 1,
@@ -1863,7 +1863,7 @@ module Stream2Mmap_mmap_m_axi_write
 
 //------------------------AW channel begin---------------
 //------------------------Instantiation------------------
-    Stream2Mmap_mmap_m_axi_reg_slice #(
+    Mmap2Stream_mmap_m_axi_reg_slice #(
         .DATA_WIDTH     (BUS_ADDR_WIDTH + 32)
     ) rs_wreq (
         .clk            (ACLK),
@@ -2065,7 +2065,7 @@ module Stream2Mmap_mmap_m_axi_write
 //------------------------W channel begin----------------
 //------------------------Instantiation------------------
 
-    Stream2Mmap_mmap_m_axi_fifo #(
+    Mmap2Stream_mmap_m_axi_fifo #(
         .DATA_WIDTH     (8),
         .ADDR_WIDTH     (log2(NUM_WRITE_OUTSTANDING)),
         .DEPTH          (NUM_WRITE_OUTSTANDING)
@@ -2145,7 +2145,7 @@ module Stream2Mmap_mmap_m_axi_write
 //------------------------W channel end------------------
 
     // Write throttling unit
-    Stream2Mmap_mmap_m_axi_throttle #(
+    Mmap2Stream_mmap_m_axi_throttle #(
         .CONSERVATIVE(CONSERVATIVE),
         .USED_FIX(0),
         .ADDR_WIDTH(BUS_ADDR_WIDTH),
@@ -2157,7 +2157,7 @@ module Stream2Mmap_mmap_m_axi_write
         .clk(ACLK),
         .reset(ARESET),
         .clk_en(ACLK_EN),
-        // internal 
+        // internal
         .in_TOP_AWADDR(AWADDR_Dummy),
         .in_TOP_AWLEN(AWLEN_Dummy),
         .in_TOP_AWVALID(AWVALID_Dummy),
@@ -2181,10 +2181,10 @@ module Stream2Mmap_mmap_m_axi_write
         .out_BUS_WVALID(out_BUS_WVALID),
         .in_BUS_WREADY(in_BUS_WREADY)
     );
-    
+
 //------------------------B channel begin----------------
 //------------------------Instantiation------------------
-    Stream2Mmap_mmap_m_axi_reg_slice #(
+    Mmap2Stream_mmap_m_axi_reg_slice #(
         .DATA_WIDTH     (1)
     ) rs_resp (
         .clk            (ACLK),
@@ -2196,7 +2196,7 @@ module Stream2Mmap_mmap_m_axi_write
         .m_valid        (resp_valid),
         .m_ready        (resp_ready));
 
-    Stream2Mmap_mmap_m_axi_fifo #(
+    Mmap2Stream_mmap_m_axi_fifo #(
         .DATA_WIDTH     (1),
         .ADDR_WIDTH     (log2(NUM_WRITE_OUTSTANDING)),
         .DEPTH          (NUM_WRITE_OUTSTANDING)
@@ -2221,7 +2221,7 @@ module Stream2Mmap_mmap_m_axi_write
 //------------------------B channel end------------------
 endmodule
 
-module Stream2Mmap_mmap_m_axi_throttle
+module Mmap2Stream_mmap_m_axi_throttle
 #(parameter
     CONSERVATIVE   = 0,
     USED_FIX       = 0,
@@ -2230,7 +2230,7 @@ module Stream2Mmap_mmap_m_axi_throttle
     DATA_WIDTH     = 32,
     DEPTH          = 16,
     MAXREQS        = 16,
-    AVERAGE_MODE   = 0 
+    AVERAGE_MODE   = 0
 )(
     input  wire                      clk,
     input  wire                      reset,
@@ -2328,7 +2328,7 @@ module Stream2Mmap_mmap_m_axi_throttle
         wire [ADDR_WIDTH + 7 : 0]   rs_req_in;
         wire [ADDR_WIDTH + 7 : 0]   rs_req_out;
 
-        Stream2Mmap_mmap_m_axi_reg_slice #(
+        Mmap2Stream_mmap_m_axi_reg_slice #(
             .DATA_WIDTH     (ADDR_WIDTH + 8)
         ) rs_req (
             .clk            (clk),
@@ -2384,7 +2384,7 @@ module Stream2Mmap_mmap_m_axi_throttle
             end
         end
 
-        Stream2Mmap_mmap_m_axi_fifo #(
+        Mmap2Stream_mmap_m_axi_fifo #(
             .DATA_WIDTH     (ADDR_WIDTH + 8),
             .ADDR_WIDTH     (log2(MAXREQS)),
             .DEPTH          (MAXREQS)
@@ -2423,8 +2423,8 @@ module Stream2Mmap_mmap_m_axi_throttle
                     last_cnt <= last_cnt - 1;
             end
         end
-            
-        Stream2Mmap_mmap_m_axi_fifo #(
+
+        Mmap2Stream_mmap_m_axi_fifo #(
             .DATA_WIDTH     (DATA_WIDTH + DATA_WIDTH/8 + 1),
             .ADDR_WIDTH     (log2(DEPTH)),
             .DEPTH          (DEPTH)
@@ -2446,7 +2446,7 @@ module Stream2Mmap_mmap_m_axi_throttle
 endmodule
 
 
-module Stream2Mmap_mmap_m_axi_reg_slice
+module Mmap2Stream_mmap_m_axi_reg_slice
 #(parameter
     DATA_WIDTH = 8
 ) (
@@ -2548,7 +2548,7 @@ module Stream2Mmap_mmap_m_axi_reg_slice
     end
 endmodule
 
-module Stream2Mmap_mmap_m_axi_fifo
+module Mmap2Stream_mmap_m_axi_fifo
 #(parameter
     MEM_STYLE   = "shiftreg",
     DATA_WIDTH = 32,
@@ -2581,11 +2581,11 @@ module Stream2Mmap_mmap_m_axi_fifo
     reg  [ADDR_WIDTH:0]   mOutPtr = 1'b0;
 
 //------------------------Instantiation------------------
-    generate 
+    generate
     if ((MEM_STYLE == "shiftreg") || (DEPTH == 1)) begin
         reg  [ADDR_WIDTH-1:0] raddr = 1'b0;
 
-        Stream2Mmap_mmap_m_axi_srl
+        Mmap2Stream_mmap_m_axi_srl
         #(  .DATA_WIDTH     (DATA_WIDTH),
             .ADDR_WIDTH     (ADDR_WIDTH),
             .DEPTH          (DEPTH))
@@ -2618,7 +2618,7 @@ module Stream2Mmap_mmap_m_axi_fifo
         wire [ADDR_WIDTH-1:0] wnext;
         wire [ADDR_WIDTH-1:0] rnext;
 
-        Stream2Mmap_mmap_m_axi_mem
+        Mmap2Stream_mmap_m_axi_mem
         #(  .MEM_STYLE      (MEM_STYLE),
             .DATA_WIDTH     (DATA_WIDTH),
             .ADDR_WIDTH     (ADDR_WIDTH),
@@ -2668,7 +2668,7 @@ module Stream2Mmap_mmap_m_axi_fifo
         assign if_empty_n = dout_vld;
         assign push = !dout_vld & if_write;
         assign pop  = !dout_vld & if_write;
-    
+
     end else begin
 
         assign if_full_n  = full_n;
@@ -2726,7 +2726,7 @@ module Stream2Mmap_mmap_m_axi_fifo
 
 endmodule
 
-module Stream2Mmap_mmap_m_axi_srl
+module Mmap2Stream_mmap_m_axi_srl
 #(parameter
         DATA_WIDTH  = 32,
         ADDR_WIDTH  = 6,
@@ -2780,7 +2780,7 @@ module Stream2Mmap_mmap_m_axi_srl
 
 endmodule
 
-module Stream2Mmap_mmap_m_axi_mem
+module Mmap2Stream_mmap_m_axi_mem
 #(parameter
     MEM_STYLE   = "auto",
     DATA_WIDTH  = 32,

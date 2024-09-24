@@ -10,6 +10,7 @@ module vadd_bw_fsm
   ap_idle,
   n,
   rmem0,
+  wmem0,
   Mmap2Stream_0___n__q0,
   Mmap2Stream_0___rmem0__q0,
   Mmap2Stream_0__ap_start,
@@ -17,7 +18,7 @@ module vadd_bw_fsm
   Mmap2Stream_0__ap_done,
   Mmap2Stream_0__ap_idle,
   Stream2Mmap_0___n__q0,
-  Stream2Mmap_0___rmem0__q0,
+  Stream2Mmap_0___wmem0__q0,
   Stream2Mmap_0__ap_start,
   Stream2Mmap_0__ap_ready,
   Stream2Mmap_0__ap_done,
@@ -31,7 +32,7 @@ module vadd_bw_fsm
 
   // pragma RS clk port=ap_clk
   // pragma RS rst port=ap_rst_n active=low
-  // pragma RS ap-ctrl ap_start=ap_start ap_done=ap_done ap_idle=ap_idle ap_ready=ap_ready scalar=(rmem0|n)
+  // pragma RS ap-ctrl ap_start=ap_start ap_done=ap_done ap_idle=ap_idle ap_ready=ap_ready scalar=(rmem0|wmem0|n)
   // pragma RS ap-ctrl ap_start=Mmap2Stream_0__ap_start ap_done=Mmap2Stream_0__ap_done ap_idle=Mmap2Stream_0__ap_idle ap_ready=Mmap2Stream_0__ap_ready scalar=Mmap2Stream_0___.*
   // pragma RS ap-ctrl ap_start=Stream2Mmap_0__ap_start ap_done=Stream2Mmap_0__ap_done ap_idle=Stream2Mmap_0__ap_idle ap_ready=Stream2Mmap_0__ap_ready scalar=Stream2Mmap_0___.*
   // pragma RS ap-ctrl ap_start=yshift_0__ap_start ap_done=yshift_0__ap_done ap_idle=yshift_0__ap_idle ap_ready=yshift_0__ap_ready scalar=yshift_0___.*
@@ -44,6 +45,7 @@ module vadd_bw_fsm
   output ap_idle;
   input [63:0] n;
   input [63:0] rmem0;
+  input [63:0] wmem0;
   output [63:0] Mmap2Stream_0___n__q0;
   output [63:0] Mmap2Stream_0___rmem0__q0;
   output Mmap2Stream_0__ap_start;
@@ -51,7 +53,7 @@ module vadd_bw_fsm
   input Mmap2Stream_0__ap_done;
   input Mmap2Stream_0__ap_idle;
   output [63:0] Stream2Mmap_0___n__q0;
-  output [63:0] Stream2Mmap_0___rmem0__q0;
+  output [63:0] Stream2Mmap_0___wmem0__q0;
   output Stream2Mmap_0__ap_start;
   input Stream2Mmap_0__ap_ready;
   input Stream2Mmap_0__ap_done;
@@ -72,7 +74,7 @@ module vadd_bw_fsm
   wire Mmap2Stream_0__ap_idle;
   reg [1:0] Mmap2Stream_0__state;
   wire [63:0] Stream2Mmap_0___n__q0;
-  wire [63:0] Stream2Mmap_0___rmem0__q0;
+  wire [63:0] Stream2Mmap_0___wmem0__q0;
   wire Stream2Mmap_0__ap_start_global__q0;
   wire Stream2Mmap_0__is_done__q0;
   wire Stream2Mmap_0__ap_done_global__q0;
@@ -107,8 +109,8 @@ module vadd_bw_fsm
       if(Mmap2Stream_0__state == 2'b00) begin
         if(Mmap2Stream_0__ap_start_global__q0) begin
           Mmap2Stream_0__state <= 2'b01;
-        end 
-      end 
+        end
+      end
       if(Mmap2Stream_0__state == 2'b01) begin
         if(Mmap2Stream_0__ap_ready) begin
           if(Mmap2Stream_0__ap_done) begin
@@ -116,24 +118,24 @@ module vadd_bw_fsm
           end else begin
             Mmap2Stream_0__state <= 2'b11;
           end
-        end 
-      end 
+        end
+      end
       if(Mmap2Stream_0__state == 2'b11) begin
         if(Mmap2Stream_0__ap_done) begin
           Mmap2Stream_0__state <= 2'b10;
-        end 
-      end 
+        end
+      end
       if(Mmap2Stream_0__state == 2'b10) begin
         if(Mmap2Stream_0__ap_done_global__q0) begin
           Mmap2Stream_0__state <= 2'b00;
-        end 
-      end 
+        end
+      end
     end
   end
 
   assign Mmap2Stream_0__ap_start = (Mmap2Stream_0__state == 2'b01);
   assign Stream2Mmap_0___n__q0 = n;
-  assign Stream2Mmap_0___rmem0__q0 = rmem0;
+  assign Stream2Mmap_0___wmem0__q0 = wmem0;
   assign Stream2Mmap_0__ap_start_global__q0 = ap_start__q0;
   assign Stream2Mmap_0__is_done__q0 = (Stream2Mmap_0__state == 2'b10);
   assign Stream2Mmap_0__ap_done_global__q0 = ap_done__q0;
@@ -145,8 +147,8 @@ module vadd_bw_fsm
       if(Stream2Mmap_0__state == 2'b00) begin
         if(Stream2Mmap_0__ap_start_global__q0) begin
           Stream2Mmap_0__state <= 2'b01;
-        end 
-      end 
+        end
+      end
       if(Stream2Mmap_0__state == 2'b01) begin
         if(Stream2Mmap_0__ap_ready) begin
           if(Stream2Mmap_0__ap_done) begin
@@ -154,18 +156,18 @@ module vadd_bw_fsm
           end else begin
             Stream2Mmap_0__state <= 2'b11;
           end
-        end 
-      end 
+        end
+      end
       if(Stream2Mmap_0__state == 2'b11) begin
         if(Stream2Mmap_0__ap_done) begin
           Stream2Mmap_0__state <= 2'b10;
-        end 
-      end 
+        end
+      end
       if(Stream2Mmap_0__state == 2'b10) begin
         if(Stream2Mmap_0__ap_done_global__q0) begin
           Stream2Mmap_0__state <= 2'b00;
-        end 
-      end 
+        end
+      end
     end
   end
 
@@ -182,8 +184,8 @@ module vadd_bw_fsm
       if(yshift_0__state == 2'b00) begin
         if(yshift_0__ap_start_global__q0) begin
           yshift_0__state <= 2'b01;
-        end 
-      end 
+        end
+      end
       if(yshift_0__state == 2'b01) begin
         if(yshift_0__ap_ready) begin
           if(yshift_0__ap_done) begin
@@ -191,18 +193,18 @@ module vadd_bw_fsm
           end else begin
             yshift_0__state <= 2'b11;
           end
-        end 
-      end 
+        end
+      end
       if(yshift_0__state == 2'b11) begin
         if(yshift_0__ap_done) begin
           yshift_0__state <= 2'b10;
-        end 
-      end 
+        end
+      end
       if(yshift_0__state == 2'b10) begin
         if(yshift_0__ap_done_global__q0) begin
           yshift_0__state <= 2'b00;
-        end 
-      end 
+        end
+      end
     end
   end
 
@@ -216,12 +218,12 @@ module vadd_bw_fsm
         2'b00: begin
           if(ap_start__q0) begin
             tapa_state <= 2'b01;
-          end 
+          end
         end
         2'b01: begin
           if(Mmap2Stream_0__is_done__q0 && Stream2Mmap_0__is_done__q0 && yshift_0__is_done__q0) begin
             tapa_state <= 2'b10;
-          end 
+          end
         end
         2'b10: begin
           tapa_state <= 2'b00;
@@ -245,4 +247,3 @@ module vadd_bw_fsm
   assign ap_done__q0 = (tapa_state == 2'b10);
 
 endmodule
-
