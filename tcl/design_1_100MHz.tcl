@@ -537,121 +537,117 @@ proc create_root_design { parentCell } {
    }
   
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
    CONFIG.CLK_DOMAIN {bd_70da_pspmc_0_0_pl0_ref_clk} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem0]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem1]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem2]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem3]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem4]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem5]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem6]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem7]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem8]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem9]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem10]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem11]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem12]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem13]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem14]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem15]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem16]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem17]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem18]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem19]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem20]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem21]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem22]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem23]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem24]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem25]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem26]
 
   set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.FREQ_HZ {99999001} \
  ] [get_bd_intf_pins /vadd_bw_0/m_axi_rmem27]
-
-  set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
- ] [get_bd_intf_pins /vadd_bw_0/s_axi_control]
 
   # Create instance: versal_cips_0, and set properties
   set versal_cips_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:versal_cips:3.3 versal_cips_0 ]
@@ -666,7 +662,7 @@ proc create_root_design { parentCell } {
       CLOCK_MODE {Custom} \
       DDR_MEMORY_MODE {Custom} \
       DEBUG_MODE {JTAG} \
-      PMC_CRP_PL0_REF_CTRL_FREQMHZ {250} \
+      PMC_CRP_PL0_REF_CTRL_FREQMHZ {100} \
       PMC_USE_PMC_NOC_AXI0 {1} \
       PS_HSDP_EGRESS_TRAFFIC {JTAG} \
       PS_HSDP_INGRESS_TRAFFIC {JTAG} \
