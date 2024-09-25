@@ -3,8 +3,8 @@
 
 
 TEMP_DIR := $(CURDIR)/build
-#VPP      := vivado -mode batch -source
-VPP      := vivado -source
+VPP      := vivado -mode batch -source
+#VPP      := vivado -source
 OVERLAY  := $(TEMP_DIR)/overlay.dcp
 OOC      := $(TEMP_DIR)/vadd_bw.dcp
 PROVERLAY:= $(TEMP_DIR)/pr_overlay.dcp
