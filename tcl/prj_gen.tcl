@@ -110,14 +110,15 @@ set_property -dict [list CONFIG.PHYSICAL_LOC {NOC_NSU512_X3Y6}] [get_bd_intf_pin
 
 
 
-#add_files -fileset constrs_1 ../xdc/pdef1.xdc
-#set_property target_constrs_file ../xdc/pdef1.xdc [current_fileset -constrset]
+add_files -fileset constrs_1 ../xdc/pdef2.xdc
+set_property target_constrs_file ../xdc/pdef2.xdc [current_fileset -constrset]
 
-launch_runs synth_1 -jobs 16
-wait_on_run synth_1
+#launch_runs synth_1 -jobs 16
+#wait_on_run synth_1
+
 #open_run synth_1 -name synth_1
 #write_checkpoint -force overlay.dcp
 
-launch_runs impl_1 -to_step write_device_image -jobs 16
-wait_on_run impl_1
+#launch_runs impl_1 -to_step write_device_image -jobs 16
+#wait_on_run impl_1
 #write_hw_platform -fixed -include_bit -force -file$ {_prj_name_}/design_1_wrapper.xsa
