@@ -8,6 +8,7 @@ resize_pblock [get_pblocks tapa_region] -add {DSP_X4Y0:DSP_X11Y163 DSP_X0Y22:DSP
 resize_pblock [get_pblocks tapa_region] -add {HDIOLOGIC_X0Y0:HDIOLOGIC_X1Y10}
 resize_pblock [get_pblocks tapa_region] -add {HDIO_BIAS_X0Y0:HDIO_BIAS_X1Y0}
 resize_pblock [get_pblocks tapa_region] -add {IRI_QUAD_X9Y1356:IRI_QUAD_X215Y1367 IRI_QUAD_X7Y1340:IRI_QUAD_X222Y1355 IRI_QUAD_X9Y588:IRI_QUAD_X215Y1339 IRI_QUAD_X36Y204:IRI_QUAD_X215Y587 IRI_QUAD_X82Y16:IRI_QUAD_X215Y203 IRI_QUAD_X78Y0:IRI_QUAD_X222Y15}
+resize_pblock [get_pblocks tapa_region] -add {NOC_NMU512_X1Y0:NOC_NMU512_X3Y6 NOC_NMU512_X0Y1:NOC_NMU512_X0Y6}
 resize_pblock [get_pblocks tapa_region] -add {RAMB18_X1Y166:RAMB18_X10Y167 RAMB18_X0Y72:RAMB18_X11Y165 RAMB18_X1Y24:RAMB18_X11Y71 RAMB18_X3Y0:RAMB18_X11Y23}
 resize_pblock [get_pblocks tapa_region] -add {RAMB36_X1Y83:RAMB36_X10Y83 RAMB36_X0Y36:RAMB36_X11Y82 RAMB36_X1Y12:RAMB36_X11Y35 RAMB36_X3Y0:RAMB36_X11Y11}
 resize_pblock [get_pblocks tapa_region] -add {RPI_HD_APB_X0Y0:RPI_HD_APB_X1Y0}
@@ -16,4 +17,3 @@ resize_pblock [get_pblocks tapa_region] -add {URAM_CAS_DLY_X2Y0:URAM_CAS_DLY_X5Y
 set_property SNAPPING_MODE ON [get_pblocks tapa_region]
 set_property DONT_TOUCH true [get_cells design_1_i/pr_region]
 set_property HD.RECONFIGURABLE true [get_cells design_1_i/pr_region]
-

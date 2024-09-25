@@ -40,7 +40,7 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 
 # The design that will be created by this Tcl script contains the following 
 # module references:
-# addr_config, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw
+# bandwidth, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw, vadd_bw
 
 # Please add the sources of those modules before sourcing this Tcl script.
 
@@ -160,7 +160,7 @@ xilinx.com:ip:versal_cips:3.3\
 set bCheckModules 1
 if { $bCheckModules == 1 } {
    set list_check_mods "\ 
-addr_config\
+bandwidth\
 vadd_bw\
 vadd_bw\
 vadd_bw\
@@ -1146,30 +1146,6 @@ proc create_root_design { parentCell } {
 
   # Create ports
 
-  # Create instance: addr_config_0, and set properties
-  set block_name addr_config
-  set block_cell_name addr_config_0
-  if { [catch {set addr_config_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
-     catch {common::send_gid_msg -ssname BD::TCL -id 2095 -severity "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
-     return 1
-   } elseif { $addr_config_0 eq "" } {
-     catch {common::send_gid_msg -ssname BD::TCL -id 2096 -severity "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
-     return 1
-   }
-  
-  set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
- ] [get_bd_intf_pins /addr_config_0/m_axi_rmem0]
-
-  set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
- ] [get_bd_intf_pins /addr_config_0/m_axi_rmem1]
-
-  set_property -dict [ list \
-   CONFIG.FREQ_HZ {249997498} \
-   CONFIG.CLK_DOMAIN {bd_70da_pspmc_0_0_pl0_ref_clk} \
- ] [get_bd_intf_pins /addr_config_0/s_axi_control]
-
   # Create instance: axi_noc_0, and set properties
   set axi_noc_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_noc:1.0 axi_noc_0 ]
   set_property -dict [list \
@@ -1652,6 +1628,30 @@ proc create_root_design { parentCell } {
    CONFIG.ASSOCIATED_BUSIF {S04_AXI} \
  ] [get_bd_pins /axi_noc_cips/aclk4]
 
+  # Create instance: bandwidth_0, and set properties
+  set block_name bandwidth
+  set block_cell_name bandwidth_0
+  if { [catch {set bandwidth_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_gid_msg -ssname BD::TCL -id 2095 -severity "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $bandwidth_0 eq "" } {
+     catch {common::send_gid_msg -ssname BD::TCL -id 2096 -severity "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {249997498} \
+ ] [get_bd_intf_pins /bandwidth_0/m_axi_chan_0]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {249997498} \
+ ] [get_bd_intf_pins /bandwidth_0/m_axi_chan_1]
+
+  set_property -dict [ list \
+   CONFIG.FREQ_HZ {249997498} \
+   CONFIG.CLK_DOMAIN {bd_70da_pspmc_0_0_pl0_ref_clk} \
+ ] [get_bd_intf_pins /bandwidth_0/s_axi_control]
+
   # Create instance: lpd2noc, and set properties
   set lpd2noc [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 lpd2noc ]
   set_property -dict [list \
@@ -1704,8 +1704,6 @@ proc create_root_design { parentCell } {
 
 
   # Create interface connections
-  connect_bd_intf_net -intf_net addr_config_0_m_axi_rmem0 [get_bd_intf_pins addr_config_0/m_axi_rmem0] [get_bd_intf_pins axi_noc_0/S00_AXI]
-  connect_bd_intf_net -intf_net addr_config_0_m_axi_rmem1 [get_bd_intf_pins addr_config_0/m_axi_rmem1] [get_bd_intf_pins axi_noc_1/S00_AXI]
   connect_bd_intf_net -intf_net axi_noc_0_CH0_DDR4_0 [get_bd_intf_ports ddr4_sdram_c0] [get_bd_intf_pins axi_noc_cips/CH0_DDR4_0]
   connect_bd_intf_net -intf_net axi_noc_0_M00_AXI [get_bd_intf_pins axi_noc_0/M00_AXI] [get_bd_intf_pins pr_region/S00_AXI18]
   connect_bd_intf_net -intf_net axi_noc_0_M01_AXI [get_bd_intf_pins axi_noc_0/M01_AXI] [get_bd_intf_pins pr_region/S00_AXI19]
@@ -1735,8 +1733,10 @@ proc create_root_design { parentCell } {
   connect_bd_intf_net -intf_net axi_noc_1_M10_AXI [get_bd_intf_pins axi_noc_1/M10_AXI] [get_bd_intf_pins pr_region/S00_AXI12]
   connect_bd_intf_net -intf_net axi_noc_1_M11_AXI [get_bd_intf_pins axi_noc_1/M11_AXI] [get_bd_intf_pins pr_region/S00_AXI13]
   connect_bd_intf_net -intf_net axi_noc_1_M12_AXI [get_bd_intf_pins axi_noc_1/M12_AXI] [get_bd_intf_pins pr_region/S00_AXI14]
+  connect_bd_intf_net -intf_net bandwidth_0_m_axi_chan_0 [get_bd_intf_pins axi_noc_0/S00_AXI] [get_bd_intf_pins bandwidth_0/m_axi_chan_0]
+  connect_bd_intf_net -intf_net bandwidth_0_m_axi_chan_1 [get_bd_intf_pins axi_noc_1/S00_AXI] [get_bd_intf_pins bandwidth_0/m_axi_chan_1]
   connect_bd_intf_net -intf_net ddr4_c0_sysclk_1 [get_bd_intf_ports ddr4_c0_sysclk] [get_bd_intf_pins axi_noc_cips/sys_clk0]
-  connect_bd_intf_net -intf_net lpd2noc_M00_AXI [get_bd_intf_pins addr_config_0/s_axi_control] [get_bd_intf_pins lpd2noc/M00_AXI]
+  connect_bd_intf_net -intf_net lpd2noc_M00_AXI [get_bd_intf_pins bandwidth_0/s_axi_control] [get_bd_intf_pins lpd2noc/M00_AXI]
   connect_bd_intf_net -intf_net pr_region_m_axi_rmem5 [get_bd_intf_pins axi_noc_0/S13_AXI] [get_bd_intf_pins pr_region/m_axi_rmem5]
   connect_bd_intf_net -intf_net pr_region_m_axi_rmem6 [get_bd_intf_pins axi_noc_1/S01_AXI] [get_bd_intf_pins pr_region/m_axi_rmem6]
   connect_bd_intf_net -intf_net pr_region_m_axi_rmem7 [get_bd_intf_pins axi_noc_1/S02_AXI] [get_bd_intf_pins pr_region/m_axi_rmem7]
@@ -1772,47 +1772,47 @@ proc create_root_design { parentCell } {
 
   # Create port connections
   connect_bd_net -net proc_sys_reset_0_interconnect_aresetn [get_bd_pins lpd2noc/aresetn] [get_bd_pins proc_sys_reset_0/interconnect_aresetn]
-  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins addr_config_0/ap_rst_n] [get_bd_pins pr_region/ext_reset_in] [get_bd_pins proc_sys_reset_0/peripheral_aresetn]
+  connect_bd_net -net proc_sys_reset_0_peripheral_aresetn [get_bd_pins bandwidth_0/ap_rst_n] [get_bd_pins pr_region/ext_reset_in] [get_bd_pins proc_sys_reset_0/peripheral_aresetn]
   connect_bd_net -net versal_cips_0_fpd_cci_noc_axi0_clk [get_bd_pins axi_noc_cips/aclk0] [get_bd_pins versal_cips_0/fpd_cci_noc_axi0_clk]
   connect_bd_net -net versal_cips_0_fpd_cci_noc_axi1_clk [get_bd_pins axi_noc_cips/aclk1] [get_bd_pins versal_cips_0/fpd_cci_noc_axi1_clk]
   connect_bd_net -net versal_cips_0_fpd_cci_noc_axi2_clk [get_bd_pins axi_noc_cips/aclk2] [get_bd_pins versal_cips_0/fpd_cci_noc_axi2_clk]
   connect_bd_net -net versal_cips_0_fpd_cci_noc_axi3_clk [get_bd_pins axi_noc_cips/aclk3] [get_bd_pins versal_cips_0/fpd_cci_noc_axi3_clk]
-  connect_bd_net -net versal_cips_0_pl0_ref_clk [get_bd_pins addr_config_0/ap_clk] [get_bd_pins axi_noc_0/aclk0] [get_bd_pins axi_noc_1/aclk0] [get_bd_pins lpd2noc/aclk] [get_bd_pins pr_region/ap_clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins versal_cips_0/m_axi_lpd_aclk] [get_bd_pins versal_cips_0/pl0_ref_clk]
+  connect_bd_net -net versal_cips_0_pl0_ref_clk [get_bd_pins axi_noc_0/aclk0] [get_bd_pins axi_noc_1/aclk0] [get_bd_pins bandwidth_0/ap_clk] [get_bd_pins lpd2noc/aclk] [get_bd_pins pr_region/ap_clk] [get_bd_pins proc_sys_reset_0/slowest_sync_clk] [get_bd_pins versal_cips_0/m_axi_lpd_aclk] [get_bd_pins versal_cips_0/pl0_ref_clk]
   connect_bd_net -net versal_cips_0_pl0_resetn [get_bd_pins proc_sys_reset_0/ext_reset_in] [get_bd_pins versal_cips_0/pl0_resetn]
   connect_bd_net -net versal_cips_0_pmc_axi_noc_axi0_clk [get_bd_pins axi_noc_cips/aclk4] [get_bd_pins versal_cips_0/pmc_axi_noc_axi0_clk]
 
   # Create address segments
-  assign_bd_address -offset 0x020380000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem0] [get_bd_addr_segs pr_region/vadd_bw_10/s_axi_control/reg0] -force
-  assign_bd_address -offset 0x0203C0000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem0] [get_bd_addr_segs pr_region/vadd_bw_11/s_axi_control/reg0] -force
-  assign_bd_address -offset 0x020400000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem0] [get_bd_addr_segs pr_region/vadd_bw_12/s_axi_control/reg0] -force
-  assign_bd_address -offset 0x020440000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem0] [get_bd_addr_segs pr_region/vadd_bw_13/s_axi_control/reg0] -force
-  assign_bd_address -offset 0x020100000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem0] [get_bd_addr_segs pr_region/vadd_bw_1/s_axi_control/reg0] -force
-  assign_bd_address -offset 0x020180000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem0] [get_bd_addr_segs pr_region/vadd_bw_2/s_axi_control/reg0] -force
-  assign_bd_address -offset 0x0201C0000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem0] [get_bd_addr_segs pr_region/vadd_bw_3/s_axi_control/reg0] -force
-  assign_bd_address -offset 0x020200000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem0] [get_bd_addr_segs pr_region/vadd_bw_4/s_axi_control/reg0] -force
-  assign_bd_address -offset 0x020240000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem0] [get_bd_addr_segs pr_region/vadd_bw_5/s_axi_control/reg0] -force
-  assign_bd_address -offset 0x020280000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem0] [get_bd_addr_segs pr_region/vadd_bw_6/s_axi_control/reg0] -force
-  assign_bd_address -offset 0x0202C0000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem0] [get_bd_addr_segs pr_region/vadd_bw_7/s_axi_control/reg0] -force
-  assign_bd_address -offset 0x020300000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem0] [get_bd_addr_segs pr_region/vadd_bw_8/s_axi_control/reg0] -force
-  assign_bd_address -offset 0x020340000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem0] [get_bd_addr_segs pr_region/vadd_bw_9/s_axi_control/reg0] -force
-  assign_bd_address -offset 0x020580000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem1] [get_bd_addr_segs pr_region/vadd_bw_14/s_axi_control/reg0] -force
-  assign_bd_address -offset 0x0205C0000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem1] [get_bd_addr_segs pr_region/vadd_bw_15/s_axi_control/reg0] -force
-  assign_bd_address -offset 0x020600000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem1] [get_bd_addr_segs pr_region/vadd_bw_16/s_axi_control/reg0] -force
-  assign_bd_address -offset 0x020640000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem1] [get_bd_addr_segs pr_region/vadd_bw_17/s_axi_control/reg0] -force
-  assign_bd_address -offset 0x020680000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem1] [get_bd_addr_segs pr_region/vadd_bw_18/s_axi_control/reg0] -force
-  assign_bd_address -offset 0x0206C0000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem1] [get_bd_addr_segs pr_region/vadd_bw_19/s_axi_control/reg0] -force
-  assign_bd_address -offset 0x020700000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem1] [get_bd_addr_segs pr_region/vadd_bw_20/s_axi_control/reg0] -force
-  assign_bd_address -offset 0x020740000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem1] [get_bd_addr_segs pr_region/vadd_bw_21/s_axi_control/reg0] -force
-  assign_bd_address -offset 0x020780000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem1] [get_bd_addr_segs pr_region/vadd_bw_22/s_axi_control/reg0] -force
-  assign_bd_address -offset 0x0207C0000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem1] [get_bd_addr_segs pr_region/vadd_bw_23/s_axi_control/reg0] -force
-  assign_bd_address -offset 0x020800000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem1] [get_bd_addr_segs pr_region/vadd_bw_24/s_axi_control/reg0] -force
-  assign_bd_address -offset 0x020840000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem1] [get_bd_addr_segs pr_region/vadd_bw_25/s_axi_control/reg0] -force
-  assign_bd_address -offset 0x020880000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces addr_config_0/m_axi_rmem1] [get_bd_addr_segs pr_region/vadd_bw_26/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x020380000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_0] [get_bd_addr_segs pr_region/vadd_bw_10/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x0203C0000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_0] [get_bd_addr_segs pr_region/vadd_bw_11/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x020400000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_0] [get_bd_addr_segs pr_region/vadd_bw_12/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x020440000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_0] [get_bd_addr_segs pr_region/vadd_bw_13/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x020100000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_0] [get_bd_addr_segs pr_region/vadd_bw_1/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x020180000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_0] [get_bd_addr_segs pr_region/vadd_bw_2/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x0201C0000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_0] [get_bd_addr_segs pr_region/vadd_bw_3/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x020200000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_0] [get_bd_addr_segs pr_region/vadd_bw_4/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x020240000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_0] [get_bd_addr_segs pr_region/vadd_bw_5/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x020280000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_0] [get_bd_addr_segs pr_region/vadd_bw_6/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x0202C0000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_0] [get_bd_addr_segs pr_region/vadd_bw_7/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x020300000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_0] [get_bd_addr_segs pr_region/vadd_bw_8/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x020340000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_0] [get_bd_addr_segs pr_region/vadd_bw_9/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x020580000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_1] [get_bd_addr_segs pr_region/vadd_bw_14/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x0205C0000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_1] [get_bd_addr_segs pr_region/vadd_bw_15/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x020600000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_1] [get_bd_addr_segs pr_region/vadd_bw_16/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x020640000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_1] [get_bd_addr_segs pr_region/vadd_bw_17/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x020680000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_1] [get_bd_addr_segs pr_region/vadd_bw_18/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x0206C0000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_1] [get_bd_addr_segs pr_region/vadd_bw_19/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x020700000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_1] [get_bd_addr_segs pr_region/vadd_bw_20/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x020740000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_1] [get_bd_addr_segs pr_region/vadd_bw_21/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x020780000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_1] [get_bd_addr_segs pr_region/vadd_bw_22/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x0207C0000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_1] [get_bd_addr_segs pr_region/vadd_bw_23/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x020800000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_1] [get_bd_addr_segs pr_region/vadd_bw_24/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x020840000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_1] [get_bd_addr_segs pr_region/vadd_bw_25/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x020880000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces bandwidth_0/m_axi_chan_1] [get_bd_addr_segs pr_region/vadd_bw_26/s_axi_control/reg0] -force
   assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces versal_cips_0/FPD_CCI_NOC_0] [get_bd_addr_segs axi_noc_cips/S00_AXI/C0_DDR_LOW0] -force
   assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces versal_cips_0/FPD_CCI_NOC_1] [get_bd_addr_segs axi_noc_cips/S01_AXI/C0_DDR_LOW0] -force
   assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces versal_cips_0/FPD_CCI_NOC_2] [get_bd_addr_segs axi_noc_cips/S02_AXI/C0_DDR_LOW0] -force
   assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces versal_cips_0/FPD_CCI_NOC_3] [get_bd_addr_segs axi_noc_cips/S03_AXI/C0_DDR_LOW0] -force
-  assign_bd_address -offset 0x80000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces versal_cips_0/M_AXI_LPD] [get_bd_addr_segs addr_config_0/s_axi_control/reg0] -force
+  assign_bd_address -offset 0x80000000 -range 0x00000080 -target_address_space [get_bd_addr_spaces versal_cips_0/M_AXI_LPD] [get_bd_addr_segs bandwidth_0/s_axi_control/reg0] -force
   assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces versal_cips_0/PMC_NOC_AXI_0] [get_bd_addr_segs axi_noc_cips/S04_AXI/C0_DDR_LOW0] -force
   assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces pr_region/vadd_bw_1/m_axi_rmem0] [get_bd_addr_segs axi_noc_cips/S00_INI/C0_DDR_LOW0] -force
   assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces pr_region/vadd_bw_2/m_axi_rmem0] [get_bd_addr_segs axi_noc_cips/S00_INI/C0_DDR_LOW0] -force
