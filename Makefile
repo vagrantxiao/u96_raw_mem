@@ -11,7 +11,7 @@ all:
 git:
 	git add .
 	git commit -m "$(m)"
-	git push origin main
+	git push origin ylxiao/u96
 
 clean:
 	rm -rf $(TEMP_DIR)
