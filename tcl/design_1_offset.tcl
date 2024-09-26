@@ -40,7 +40,7 @@ if { [string first $scripts_vivado_version $current_vivado_version] == -1 } {
 
 # The design that will be created by this Tcl script contains the following 
 # module references:
-# vadd_bw
+# axi_offset, vadd_bw
 
 # Please add the sources of those modules before sourcing this Tcl script.
 
@@ -159,6 +159,7 @@ xilinx.com:ip:zynq_ultra_ps_e:3.4\
 set bCheckModules 1
 if { $bCheckModules == 1 } {
    set list_check_mods "\ 
+axi_offset\
 vadd_bw\
 "
 
@@ -225,6 +226,17 @@ proc create_root_design { parentCell } {
 
   # Create ports
 
+  # Create instance: axi_offset_0, and set properties
+  set block_name axi_offset
+  set block_cell_name axi_offset_0
+  if { [catch {set axi_offset_0 [create_bd_cell -type module -reference $block_name $block_cell_name] } errmsg] } {
+     catch {common::send_gid_msg -ssname BD::TCL -id 2095 -severity "ERROR" "Unable to add referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   } elseif { $axi_offset_0 eq "" } {
+     catch {common::send_gid_msg -ssname BD::TCL -id 2096 -severity "ERROR" "Unable to referenced block <$block_name>. Please add the files for ${block_name}'s definition into the project."}
+     return 1
+   }
+  
   # Create instance: axi_smc, and set properties
   set axi_smc [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 axi_smc ]
   set_property CONFIG.NUM_SI {2} $axi_smc
@@ -235,6 +247,11 @@ proc create_root_design { parentCell } {
 
   # Create instance: smartconnect_0, and set properties
   set smartconnect_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 smartconnect_0 ]
+
+  # Create instance: smartconnect_1, and set properties
+  set smartconnect_1 [ create_bd_cell -type ip -vlnv xilinx.com:ip:smartconnect:1.0 smartconnect_1 ]
+  set_property CONFIG.NUM_SI {1} $smartconnect_1
+
 
   # Create instance: vadd_bw_0, and set properties
   set block_name vadd_bw
@@ -730,8 +747,10 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
 
 
   # Create interface connections
+  connect_bd_intf_net -intf_net axi_offset_0_m_axi_gmem [get_bd_intf_pins axi_offset_0/m_axi_gmem] [get_bd_intf_pins smartconnect_1/S00_AXI]
   connect_bd_intf_net -intf_net axi_smc_M00_AXI [get_bd_intf_pins axi_smc/M00_AXI] [get_bd_intf_pins zynq_ultra_ps_e_0/S_AXI_HP0_FPD]
-  connect_bd_intf_net -intf_net smartconnect_0_M00_AXI [get_bd_intf_pins smartconnect_0/M00_AXI] [get_bd_intf_pins vadd_bw_0/s_axi_control]
+  connect_bd_intf_net -intf_net smartconnect_0_M00_AXI [get_bd_intf_pins axi_offset_0/s_axi_gmem] [get_bd_intf_pins smartconnect_0/M00_AXI]
+  connect_bd_intf_net -intf_net smartconnect_1_M00_AXI [get_bd_intf_pins smartconnect_1/M00_AXI] [get_bd_intf_pins vadd_bw_0/s_axi_control]
   connect_bd_intf_net -intf_net vadd_bw_0_m_axi_rmem0 [get_bd_intf_pins axi_smc/S00_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_rmem0]
   connect_bd_intf_net -intf_net vadd_bw_0_m_axi_wmem0 [get_bd_intf_pins axi_smc/S01_AXI] [get_bd_intf_pins vadd_bw_0/m_axi_wmem0]
   connect_bd_intf_net -intf_net zynq_ultra_ps_e_0_M_AXI_HPM0_FPD [get_bd_intf_pins smartconnect_0/S00_AXI] [get_bd_intf_pins zynq_ultra_ps_e_0/M_AXI_HPM0_FPD]
@@ -739,16 +758,17 @@ Port;FD4A0000;FD4AFFFF;1|FPD;DPDMA;FD4C0000;FD4CFFFF;1|FPD;DDR_XMPU5_CFG;FD05000
 
   # Create port connections
   connect_bd_net -net rst_ps8_0_100M_interconnect_aresetn [get_bd_pins rst_ps8_0_100M/interconnect_aresetn] [get_bd_pins smartconnect_0/aresetn]
-  connect_bd_net -net rst_ps8_0_100M_peripheral_aresetn [get_bd_pins axi_smc/aresetn] [get_bd_pins rst_ps8_0_100M/peripheral_aresetn] [get_bd_pins vadd_bw_0/ap_rst_n]
-  connect_bd_net -net zynq_ultra_ps_e_0_pl_clk0 [get_bd_pins axi_smc/aclk] [get_bd_pins rst_ps8_0_100M/slowest_sync_clk] [get_bd_pins smartconnect_0/aclk] [get_bd_pins vadd_bw_0/ap_clk] [get_bd_pins zynq_ultra_ps_e_0/maxihpm0_fpd_aclk] [get_bd_pins zynq_ultra_ps_e_0/maxihpm1_fpd_aclk] [get_bd_pins zynq_ultra_ps_e_0/pl_clk0] [get_bd_pins zynq_ultra_ps_e_0/saxihp0_fpd_aclk]
+  connect_bd_net -net rst_ps8_0_100M_peripheral_aresetn [get_bd_pins axi_offset_0/ap_rst_n] [get_bd_pins axi_smc/aresetn] [get_bd_pins rst_ps8_0_100M/peripheral_aresetn] [get_bd_pins smartconnect_1/aresetn] [get_bd_pins vadd_bw_0/ap_rst_n]
+  connect_bd_net -net zynq_ultra_ps_e_0_pl_clk0 [get_bd_pins axi_offset_0/ap_clk] [get_bd_pins axi_smc/aclk] [get_bd_pins rst_ps8_0_100M/slowest_sync_clk] [get_bd_pins smartconnect_0/aclk] [get_bd_pins smartconnect_1/aclk] [get_bd_pins vadd_bw_0/ap_clk] [get_bd_pins zynq_ultra_ps_e_0/maxihpm0_fpd_aclk] [get_bd_pins zynq_ultra_ps_e_0/maxihpm1_fpd_aclk] [get_bd_pins zynq_ultra_ps_e_0/pl_clk0] [get_bd_pins zynq_ultra_ps_e_0/saxihp0_fpd_aclk]
   connect_bd_net -net zynq_ultra_ps_e_0_pl_resetn0 [get_bd_pins rst_ps8_0_100M/ext_reset_in] [get_bd_pins zynq_ultra_ps_e_0/pl_resetn0]
 
   # Create address segments
+  assign_bd_address -offset 0x000200000000 -range 0x00001000 -target_address_space [get_bd_addr_spaces axi_offset_0/m_axi_gmem] [get_bd_addr_segs vadd_bw_0/s_axi_control/reg0] -force
   assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem0] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP2/HP0_DDR_LOW] -force
   assign_bd_address -offset 0xFF000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_rmem0] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP2/HP0_LPS_OCM] -force
   assign_bd_address -offset 0x00000000 -range 0x80000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_wmem0] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP2/HP0_DDR_LOW] -force
   assign_bd_address -offset 0xFF000000 -range 0x01000000 -target_address_space [get_bd_addr_spaces vadd_bw_0/m_axi_wmem0] [get_bd_addr_segs zynq_ultra_ps_e_0/SAXIGP2/HP0_LPS_OCM] -force
-  assign_bd_address -offset 0xA0000000 -range 0x00001000 -target_address_space [get_bd_addr_spaces zynq_ultra_ps_e_0/Data] [get_bd_addr_segs vadd_bw_0/s_axi_control/reg0] -force
+  assign_bd_address -offset 0xA0000000 -range 0x00001000 -target_address_space [get_bd_addr_spaces zynq_ultra_ps_e_0/Data] [get_bd_addr_segs axi_offset_0/s_axi_gmem/reg0] -force
 
 
   # Restore current instance

@@ -64,9 +64,11 @@ int main(){
 	Xil_Out32(AXIL_N_HIGH, 0);
 
 	Xil_Out32(KL_BASE, 1);
-	while((Xil_In32(KL_BASE)&0x00000002)!=0x00000002);
+	while((Xil_In32(KL_BASE)&0x00000002)!=0x00000002){
+		printf("Polling\n");;
+	}
 
-	printf("\n\n\n");
+	printf("Running\nRunning\nRunning\n");
 	int err_cnt=0;
 	for(int i=0; i<128; i++){
 		if((TxPacket[i]<<1) != RxPacket[i]){
