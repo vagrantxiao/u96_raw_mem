@@ -40,7 +40,7 @@
 
 int main(){
 	printf("Hello world\n");
-	printf("%08x\n", MEM_BASE_ADDR);
+	printf("MEM_BASE_ADDR=%08x\n", MEM_BASE_ADDR);
 
 	#ifdef __aarch64__
 		Xil_SetTlbAttributes(TX_BUFFER_BASE, NORM_NONCACHE);
@@ -64,13 +64,23 @@ int main(){
 	Xil_Out32(AXIL_N_HIGH, 0);
 
 	Xil_Out32(KL_BASE, 1);
-	for(int i=0; i<10; i++){
-		printf("REG0: %08x\n", Xil_In32(KL_BASE));
-	}
+	while((Xil_In32(KL_BASE)&0x00000002)!=0x00000002);
+
 	printf("\n\n\n");
+	int err_cnt=0;
 	for(int i=0; i<128; i++){
-		printf("TX[%d]:%08x, RX[%d]: %08x\n", i, TxPacket[i]<<1, i, RxPacket[i]);
+		if((TxPacket[i]<<1) != RxPacket[i]){
+			printf("TX[%d]:%08x, RX[%d]: %08x\n", i, TxPacket[i]<<1, i, RxPacket[i]);
+			err_cnt++;
+		}
 	}
+
+	if (err_cnt) {
+		printf("We got %d errors\n", err_cnt);
+	}else{
+		printf("PASSED!\n");
+	}
+
 
 	return 0;
 }
