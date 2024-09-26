@@ -10,162 +10,127 @@
 (* CORE_GENERATION_INFO="write_mem_write_mem,hls_ip_2022_2,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=0,HLS_INPUT_PART=xcu50-fsvh2104-2-e,HLS_INPUT_CLOCK=3.000000,HLS_INPUT_ARCH=others,HLS_SYN_CLOCK=2.190000,HLS_SYN_LAT=-1,HLS_SYN_TPT=none,HLS_SYN_MEM=0,HLS_SYN_DSP=0,HLS_SYN_FF=5522,HLS_SYN_LUT=8960,HLS_VERSION=2022_2}" *)
 
 module axi_offset #(
-      parameter ID_WIDTH        = 1
-    , parameter ADDR_WIDTH      = 64
-    , parameter DATA_WIDTH      = 32
-    , parameter AWUSER_WIDTH    = 1
-    , parameter ARUSER_WIDTH    = 1
-    , parameter WUSER_WIDTH     = 1
-    , parameter RUSER_WIDTH     = 1
-    , parameter BUSER_WIDTH     = 1
-    , parameter USER_VALUE      = 0
-    , parameter PROT_VALUE      = 0
-    , parameter CACHE_VALUE     = 3
-    , parameter DEC_S_ADDR      = 0 // slave ADDR is decreased by this value
-    , parameter INC_M_ADDR      = 64'h0000_0002_0000_0000 // malster ADDR is increased by this value
-    , parameter WSTRB_WIDTH     = (DATA_WIDTH / 8)
+      parameter DEC_S_ADDR      = 0 // slave ADDR is decreased by this value
+    , parameter INC_M_ADDR      = 64'h0000_0000_0000_0000 // malster ADDR is increased by this value
 )(
-      input                        ap_clk
-    , input                        ap_rst_n
+      input          ap_clk
+    , input          ap_rst_n
 
-    , input                        s_axi_gmem_AWVALID
-    , output                       s_axi_gmem_AWREADY
-    , input  [   ADDR_WIDTH - 1:0] s_axi_gmem_AWADDR
-    , input  [     ID_WIDTH - 1:0] s_axi_gmem_AWID
-    , input  [                7:0] s_axi_gmem_AWLEN
-    , input  [                2:0] s_axi_gmem_AWSIZE
-    , input  [                1:0] s_axi_gmem_AWBURST
-    , input  [                1:0] s_axi_gmem_AWLOCK
-    , input  [                3:0] s_axi_gmem_AWCACHE
-    , input  [                2:0] s_axi_gmem_AWPROT
-    , input  [                3:0] s_axi_gmem_AWQOS
-    , input  [                3:0] s_axi_gmem_AWREGION
-    , input  [ AWUSER_WIDTH - 1:0] s_axi_gmem_AWUSER
-    , input                        s_axi_gmem_WVALID
-    , output                       s_axi_gmem_WREADY
-    , input  [   DATA_WIDTH - 1:0] s_axi_gmem_WDATA
-    , input  [  WSTRB_WIDTH - 1:0] s_axi_gmem_WSTRB
-    , input                        s_axi_gmem_WLAST
-    , input  [     ID_WIDTH - 1:0] s_axi_gmem_WID
-    , input  [  WUSER_WIDTH - 1:0] s_axi_gmem_WUSER
-    , input                        s_axi_gmem_ARVALID
-    , output                       s_axi_gmem_ARREADY
-    , input  [   ADDR_WIDTH - 1:0] s_axi_gmem_ARADDR
-    , input  [     ID_WIDTH - 1:0] s_axi_gmem_ARID
-    , input  [                7:0] s_axi_gmem_ARLEN
-    , input  [                2:0] s_axi_gmem_ARSIZE
-    , input  [                1:0] s_axi_gmem_ARBURST
-    , input  [                1:0] s_axi_gmem_ARLOCK
-    , input  [                3:0] s_axi_gmem_ARCACHE
-    , input  [                2:0] s_axi_gmem_ARPROT
-    , input  [                3:0] s_axi_gmem_ARQOS
-    , input  [                3:0] s_axi_gmem_ARREGION
-    , input  [ ARUSER_WIDTH - 1:0] s_axi_gmem_ARUSER
-    , output                       s_axi_gmem_RVALID
-    , input                        s_axi_gmem_RREADY
-    , output [   DATA_WIDTH - 1:0] s_axi_gmem_RDATA
-    , output                       s_axi_gmem_RLAST
-    , output [     ID_WIDTH - 1:0] s_axi_gmem_RID
-    , output [  RUSER_WIDTH - 1:0] s_axi_gmem_RUSER
-    , output [                1:0] s_axi_gmem_RRESP
-    , output                       s_axi_gmem_BVALID
-    , input                        s_axi_gmem_BREADY
-    , output [                1:0] s_axi_gmem_BRESP
-    , output [     ID_WIDTH - 1:0] s_axi_gmem_BID
-    , output [  BUSER_WIDTH - 1:0] s_axi_gmem_BUSER
+    , output [63:0]  m_axi_rmem0_ARADDR
+    , output  [1:0]  m_axi_rmem0_ARBURST
+    , output  [3:0]  m_axi_rmem0_ARCACHE
+    , output  [0:0]  m_axi_rmem0_ARID
+    , output  [7:0]  m_axi_rmem0_ARLEN
+    , output         m_axi_rmem0_ARLOCK
+    , output  [2:0]  m_axi_rmem0_ARPROT
+    , output  [3:0]  m_axi_rmem0_ARQOS
+    , input          m_axi_rmem0_ARREADY
+    , output  [2:0]  m_axi_rmem0_ARSIZE
+    , output         m_axi_rmem0_ARVALID
+    , output [63:0]  m_axi_rmem0_AWADDR
+    , output  [1:0]  m_axi_rmem0_AWBURST
+    , output  [3:0]  m_axi_rmem0_AWCACHE
+    , output  [0:0]  m_axi_rmem0_AWID
+    , output  [7:0]  m_axi_rmem0_AWLEN
+    , output         m_axi_rmem0_AWLOCK
+    , output  [2:0]  m_axi_rmem0_AWPROT
+    , output  [3:0]  m_axi_rmem0_AWQOS
+    , input          m_axi_rmem0_AWREADY
+    , output  [2:0]  m_axi_rmem0_AWSIZE
+    , output         m_axi_rmem0_AWVALID
+    , input   [0:0]  m_axi_rmem0_BID
+    , output         m_axi_rmem0_BREADY
+    , input   [1:0]  m_axi_rmem0_BRESP
+    , input          m_axi_rmem0_BVALID
+    , input [255:0]  m_axi_rmem0_RDATA
+    , input   [0:0]  m_axi_rmem0_RID
+    , input          m_axi_rmem0_RLAST
+    , output         m_axi_rmem0_RREADY
+    , input   [1:0]  m_axi_rmem0_RRESP
+    , input          m_axi_rmem0_RVALID
+    , output [255:0] m_axi_rmem0_WDATA
+    , output         m_axi_rmem0_WLAST
+    , input          m_axi_rmem0_WREADY
+    , output  [31:0] m_axi_rmem0_WSTRB
+    , output         m_axi_rmem0_WVALID
 
-    , output                       m_axi_gmem_AWVALID
-    , input                        m_axi_gmem_AWREADY
-    , output [   ADDR_WIDTH - 1:0] m_axi_gmem_AWADDR
-    , output [     ID_WIDTH - 1:0] m_axi_gmem_AWID
-    , output [                7:0] m_axi_gmem_AWLEN
-    , output [                2:0] m_axi_gmem_AWSIZE
-    , output [                1:0] m_axi_gmem_AWBURST
-    , output [                1:0] m_axi_gmem_AWLOCK
-    , output [                3:0] m_axi_gmem_AWCACHE
-    , output [                2:0] m_axi_gmem_AWPROT
-    , output [                3:0] m_axi_gmem_AWQOS
-    , output [                3:0] m_axi_gmem_AWREGION
-    , output [ AWUSER_WIDTH - 1:0] m_axi_gmem_AWUSER
-    , output                       m_axi_gmem_WVALID
-    , input                        m_axi_gmem_WREADY
-    , output [   DATA_WIDTH - 1:0] m_axi_gmem_WDATA
-    , output [  WSTRB_WIDTH - 1:0] m_axi_gmem_WSTRB
-    , output                       m_axi_gmem_WLAST
-    , output [     ID_WIDTH - 1:0] m_axi_gmem_WID
-    , output [  WUSER_WIDTH - 1:0] m_axi_gmem_WUSER
-    , output                       m_axi_gmem_ARVALID
-    , input                        m_axi_gmem_ARREADY
-    , output [   ADDR_WIDTH - 1:0] m_axi_gmem_ARADDR
-    , output [     ID_WIDTH - 1:0] m_axi_gmem_ARID
-    , output [                7:0] m_axi_gmem_ARLEN
-    , output [                2:0] m_axi_gmem_ARSIZE
-    , output [                1:0] m_axi_gmem_ARBURST
-    , output [                1:0] m_axi_gmem_ARLOCK
-    , output [                3:0] m_axi_gmem_ARCACHE
-    , output [                2:0] m_axi_gmem_ARPROT
-    , output [                3:0] m_axi_gmem_ARQOS
-    , output [                3:0] m_axi_gmem_ARREGION
-    , output [ ARUSER_WIDTH - 1:0] m_axi_gmem_ARUSER
-    , input                        m_axi_gmem_RVALID
-    , output                       m_axi_gmem_RREADY
-    , input  [   DATA_WIDTH - 1:0] m_axi_gmem_RDATA
-    , input                        m_axi_gmem_RLAST
-    , input  [     ID_WIDTH - 1:0] m_axi_gmem_RID
-    , input  [  RUSER_WIDTH - 1:0] m_axi_gmem_RUSER
-    , input  [                1:0] m_axi_gmem_RRESP
-    , input                        m_axi_gmem_BVALID
-    , output                       m_axi_gmem_BREADY
-    , input  [                1:0] m_axi_gmem_BRESP
-    , input  [     ID_WIDTH - 1:0] m_axi_gmem_BID
-    , input  [  BUSER_WIDTH - 1:0] m_axi_gmem_BUSER
+    , input   [63:0] s_axi_rmem0_ARADDR
+    , input    [1:0] s_axi_rmem0_ARBURST
+    , input    [3:0] s_axi_rmem0_ARCACHE
+    , input    [0:0] s_axi_rmem0_ARID
+    , input    [7:0] s_axi_rmem0_ARLEN
+    , input          s_axi_rmem0_ARLOCK
+    , input    [2:0] s_axi_rmem0_ARPROT
+    , input    [3:0] s_axi_rmem0_ARQOS
+    , output         s_axi_rmem0_ARREADY
+    , input    [2:0] s_axi_rmem0_ARSIZE
+    , input          s_axi_rmem0_ARVALID
+    , input   [63:0] s_axi_rmem0_AWADDR
+    , input    [1:0] s_axi_rmem0_AWBURST
+    , input    [3:0] s_axi_rmem0_AWCACHE
+    , input    [0:0] s_axi_rmem0_AWID
+    , input    [7:0] s_axi_rmem0_AWLEN
+    , input          s_axi_rmem0_AWLOCK
+    , input    [2:0] s_axi_rmem0_AWPROT
+    , input    [3:0] s_axi_rmem0_AWQOS
+    , output         s_axi_rmem0_AWREADY
+    , input    [2:0] s_axi_rmem0_AWSIZE
+    , input          s_axi_rmem0_AWVALID
+    , output   [0:0] s_axi_rmem0_BID
+    , input          s_axi_rmem0_BREADY
+    , output   [1:0] s_axi_rmem0_BRESP
+    , output         s_axi_rmem0_BVALID
+    , output [255:0] s_axi_rmem0_RDATA
+    , output   [0:0] s_axi_rmem0_RID
+    , output         s_axi_rmem0_RLAST
+    , input          s_axi_rmem0_RREADY
+    , output   [1:0] s_axi_rmem0_RRESP
+    , output         s_axi_rmem0_RVALID
+    , input  [255:0] s_axi_rmem0_WDATA
+    , input          s_axi_rmem0_WLAST
+    , output         s_axi_rmem0_WREADY
+    , input   [31:0] s_axi_rmem0_WSTRB
+    , input          s_axi_rmem0_WVALID
 );
 
-assign m_axi_gmem_AWVALID  = s_axi_gmem_AWVALID;
-assign m_axi_gmem_AWADDR   = s_axi_gmem_AWADDR + INC_M_ADDR - DEC_S_ADDR;
-assign m_axi_gmem_AWID     = s_axi_gmem_AWID;
-assign m_axi_gmem_AWLEN    = s_axi_gmem_AWLEN;
-assign m_axi_gmem_AWSIZE   = s_axi_gmem_AWSIZE;
-assign m_axi_gmem_AWBURST  = s_axi_gmem_AWBURST;
-assign m_axi_gmem_AWLOCK   = s_axi_gmem_AWLOCK;
-assign m_axi_gmem_AWCACHE  = s_axi_gmem_AWCACHE;
-assign m_axi_gmem_AWPROT   = s_axi_gmem_AWPROT;
-assign m_axi_gmem_AWQOS    = s_axi_gmem_AWQOS;
-assign m_axi_gmem_AWREGION = s_axi_gmem_AWREGION;
-assign m_axi_gmem_AWUSER   = s_axi_gmem_AWUSER;
-assign m_axi_gmem_WVALID   = s_axi_gmem_WVALID;
-assign m_axi_gmem_WDATA    = s_axi_gmem_WDATA;
-assign m_axi_gmem_WSTRB    = s_axi_gmem_WSTRB;
-assign m_axi_gmem_WLAST    = s_axi_gmem_WLAST;
-assign m_axi_gmem_WID      = s_axi_gmem_WID;
-assign m_axi_gmem_WUSER    = s_axi_gmem_WUSER;
-assign m_axi_gmem_ARVALID  = s_axi_gmem_ARVALID;
-assign m_axi_gmem_ARADDR   = s_axi_gmem_ARADDR + INC_M_ADDR - DEC_S_ADDR;
-assign m_axi_gmem_ARID     = s_axi_gmem_ARID;
-assign m_axi_gmem_ARLEN    = s_axi_gmem_ARLEN;
-assign m_axi_gmem_ARSIZE   = s_axi_gmem_ARSIZE;
-assign m_axi_gmem_ARBURST  = s_axi_gmem_ARBURST;
-assign m_axi_gmem_ARLOCK   = s_axi_gmem_ARLOCK;
-assign m_axi_gmem_ARCACHE  = s_axi_gmem_ARCACHE;
-assign m_axi_gmem_ARPROT   = s_axi_gmem_ARPROT;
-assign m_axi_gmem_ARQOS    = s_axi_gmem_ARQOS;
-assign m_axi_gmem_ARREGION = s_axi_gmem_ARREGION;
-assign m_axi_gmem_ARUSER   = s_axi_gmem_ARUSER;
-assign m_axi_gmem_RREADY   = s_axi_gmem_RREADY;
-assign m_axi_gmem_BREADY   = s_axi_gmem_BREADY      ;
+assign m_axi_rmem0_ARADDR  = s_axi_rmem0_ARADDR + INC_M_ADDR - DEC_S_ADDR;
+assign m_axi_rmem0_ARBURST = s_axi_rmem0_ARBURST;
+assign m_axi_rmem0_ARCACHE = s_axi_rmem0_ARCACHE;
+assign m_axi_rmem0_ARID    = s_axi_rmem0_ARID;
+assign m_axi_rmem0_ARLEN   = s_axi_rmem0_ARLEN;
+assign m_axi_rmem0_ARLOCK  = s_axi_rmem0_ARLOCK;
+assign m_axi_rmem0_ARPROT  = s_axi_rmem0_ARPROT;
+assign m_axi_rmem0_ARQOS   = s_axi_rmem0_ARQOS;
+assign m_axi_rmem0_ARSIZE  = s_axi_rmem0_ARSIZE;
+assign m_axi_rmem0_ARVALID = s_axi_rmem0_ARVALID;
+assign m_axi_rmem0_AWADDR  = s_axi_rmem0_AWADDR + INC_M_ADDR - DEC_S_ADDR;
+assign m_axi_rmem0_AWBURST = s_axi_rmem0_AWBURST;
+assign m_axi_rmem0_AWCACHE = s_axi_rmem0_AWCACHE;
+assign m_axi_rmem0_AWID    = s_axi_rmem0_AWID;
+assign m_axi_rmem0_AWLEN   = s_axi_rmem0_AWLEN;
+assign m_axi_rmem0_AWLOCK  = s_axi_rmem0_AWLOCK;
+assign m_axi_rmem0_AWPROT  = s_axi_rmem0_AWPROT;
+assign m_axi_rmem0_AWQOS   = s_axi_rmem0_AWQOS;
+assign m_axi_rmem0_AWSIZE  = s_axi_rmem0_AWSIZE;
+assign m_axi_rmem0_AWVALID = s_axi_rmem0_AWVALID;
+assign m_axi_rmem0_BREADY  = s_axi_rmem0_BREADY;
+assign m_axi_rmem0_RREADY  = s_axi_rmem0_RREADY;
+assign m_axi_rmem0_WDATA   = s_axi_rmem0_WDATA;
+assign m_axi_rmem0_WLAST   = s_axi_rmem0_WLAST;
+assign m_axi_rmem0_WSTRB   = s_axi_rmem0_WSTRB;
+assign m_axi_rmem0_WVALID  = s_axi_rmem0_WVALID;
 
-assign s_axi_gmem_AWREADY  = m_axi_gmem_AWREADY;
-assign s__axi_gmem_WREADY  = m_axi_gmem_WREADY;
-assign s__axi_gmem_ARREADY = m_axi_gmem_ARREADY;
-assign s__axi_gmem_RVALID  = m_axi_gmem_RVALID;
-assign s__axi_gmem_RDATA   = m_axi_gmem_RDATA;
-assign s__axi_gmem_RLAST   = m_axi_gmem_RLAST;
-assign s__axi_gmem_RID     = m_axi_gmem_RID;
-assign s__axi_gmem_RUSER   = m_axi_gmem_RUSER;
-assign s__axi_gmem_RRESP   = m_axi_gmem_RRESP;
-assign s__axi_gmem_BVALID  = m_axi_gmem_BVALID;
-assign s__axi_gmem_BRESP   = m_axi_gmem_BRESP;
-assign s__axi_gmem_BID     = m_axi_gmem_BID;
-assign s__axi_gmem_BUSER   = m_axi_gmem_BUSER;
+assign s_axi_rmem0_ARREADY = m_axi_rmem0_ARREADY;
+assign s_axi_rmem0_AWREADY = m_axi_rmem0_AWREADY;
+assign s_axi_rmem0_BID     = m_axi_rmem0_BID;
+assign s_axi_rmem0_BRESP   = m_axi_rmem0_BRESP;
+assign s_axi_rmem0_BVALID  = m_axi_rmem0_BVALID;
+assign s_axi_rmem0_RDATA   = m_axi_rmem0_RDATA;
+assign s_axi_rmem0_RID     = m_axi_rmem0_RID;
+assign s_axi_rmem0_RLAST   = m_axi_rmem0_RLAST;
+assign s_axi_rmem0_RRESP   = m_axi_rmem0_RRESP;
+assign s_axi_rmem0_RVALID  = m_axi_rmem0_RVALID;
+assign s_axi_rmem0_WREADY  = m_axi_rmem0_WREADY;
+
 
 endmodule //axi_offset
