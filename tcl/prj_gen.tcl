@@ -15,7 +15,7 @@ create_project ${_prj_name_} ${_prj_name_} -part xczu3eg-sbva484-1-i
 set_property board_part avnet.com:ultra96v2:part0:1.2 [current_project]
 add_src_to_project ../v/vadd_bandwidth1r1w
 add_src_to_project ../v/util
-source ../tcl/design_1_offset.tcl
+source ../tcl/design_1_offset_axil.tcl
 #source ../tcl/design_1.tcl
 update_compile_order -fileset sources_1
 make_wrapper -files [get_files ${_prj_name_}/${_prj_name_}.srcs/sources_1/bd/design_1/design_1.bd] -top
